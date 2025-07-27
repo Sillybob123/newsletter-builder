@@ -1,431 +1,307 @@
 const EmailTemplates = {
-    catalystModern: {
-        name: 'Catalyst Modern',
+    modern: {
+        name: 'Modern',
         structure: [
             {
                 type: 'header',
                 content: {
-                    logoUrl: 'https://mcusercontent.com/d76819924b4f0773791d6827b/images/66b9f1d7-4f68-f6ac-a802-885c31858105.jpg',
-                    websiteUrl: 'https://www.catalyst-magazine.com/',
-                    websiteText: 'catalyst-magazine.com',
-                    backgroundColor: '#ffffff',
-                    textColor: '#2b2b2b',
-                    showDivider: true
+                    title: 'STEM Newsletter',
+                    subtitle: 'Latest in Science, Technology, Engineering & Math',
+                    backgroundColor: '#007bff',
+                    textColor: '#ffffff'
                 }
             },
             {
-                type: 'featuredArticle',
+                type: 'article',
                 content: {
                     title: 'Designing a Sustainable Future with Sun, Wind, and Water',
                     description: 'Explore the latest innovations in renewable energy and sustainable technology that are shaping our future.',
-                    imageUrl: 'https://via.placeholder.com/560x300/007bff/ffffff?text=Sustainable+Future',
-                    ctaText: 'Read Full Article',
-                    ctaUrl: 'https://www.catalyst-magazine.com/post/designing-a-sustainable-future-with-sun-wind-and-water',
-                    layout: 'imageTop'
+                    imageUrl: 'https://via.placeholder.com/560x300/007bff/ffffff?text=Article+Image',
+                    ctaText: 'Read More',
+                    ctaUrl: '#'
                 }
             },
             {
-                type: 'articleGrid',
+                type: 'social',
                 content: {
-                    articles: [
-                        {
-                            title: 'Latest Research in Quantum Computing',
-                            description: 'Breakthrough discoveries in quantum technology.',
-                            imageUrl: 'https://via.placeholder.com/280x180/28a745/ffffff?text=Quantum',
-                            ctaUrl: '#'
-                        },
-                        {
-                            title: 'Biotechnology Innovations',
-                            description: 'Revolutionary advances in medical biotechnology.',
-                            imageUrl: 'https://via.placeholder.com/280x180/dc3545/ffffff?text=Biotech',
-                            ctaUrl: '#'
-                        }
+                    links: [
+                        { platform: 'linkedin', url: 'https://linkedin.com/company/your-magazine' },
+                        { platform: 'twitter', url: 'https://twitter.com/your-magazine' },
+                        { platform: 'instagram', url: 'https://instagram.com/your-magazine' }
                     ]
                 }
             },
             {
                 type: 'footer',
                 content: {
-                    companyName: 'Catalyst Magazine',
-                    websiteUrl: 'https://www.catalyst-magazine.com/',
-                    unsubscribeUrl: 'https://www.catalyst-magazine.com/unsubscribe',
-                    backgroundColor: '#ebebeb',
-                    textColor: '#666666'
+                    companyName: 'STEM Magazine',
+                    address: '123 Science Street, Tech City, TC 12345',
+                    unsubscribeText: 'Unsubscribe from this newsletter'
                 }
             }
         ]
     },
 
-    catalystClassic: {
-        name: 'Catalyst Classic',
+    classic: {
+        name: 'Classic',
         structure: [
             {
-                type: 'brandHeader',
+                type: 'header',
                 content: {
-                    logoUrl: 'https://mcusercontent.com/d76819924b4f0773791d6827b/images/66b9f1d7-4f68-f6ac-a802-885c31858105.jpg',
-                    websiteUrl: 'https://www.catalyst-magazine.com/',
-                    websiteText: 'catalyst-magazine.com',
-                    backgroundColor: '#ffffff',
-                    padding: '20px'
+                    title: 'The STEM Report',
+                    subtitle: 'Your Weekly Science & Technology Update',
+                    backgroundColor: '#28a745',
+                    textColor: '#ffffff'
                 }
             },
             {
-                type: 'dottedDivider'
-            },
-            {
-                type: 'twoColumnArticle',
+                type: 'text',
                 content: {
-                    leftColumn: {
-                        title: 'Featured Story',
-                        description: 'In-depth analysis of the latest scientific breakthroughs.',
-                        ctaText: 'Read More',
-                        ctaUrl: '#'
-                    },
-                    rightColumn: {
-                        imageUrl: 'https://via.placeholder.com/280x200/007bff/ffffff?text=Featured',
-                        altText: 'Featured article image'
-                    }
+                    text: 'Welcome to this week\'s edition of The STEM Report. We\'ve curated the most exciting developments in science and technology for you.',
+                    fontSize: '16px',
+                    color: '#333333'
                 }
             },
             {
-                type: 'roundedFooter',
+                type: 'article',
                 content: {
-                    companyName: 'Catalyst Magazine',
-                    unsubscribeText: 'Unsubscribe',
-                    unsubscribeUrl: '#',
-                    backgroundColor: '#ffffff',
-                    borderRadius: '40px'
-                }
-            }
-        ]
-    },
-
-    catalystMinimal: {
-        name: 'Catalyst Minimal',
-        structure: [
-            {
-                type: 'simpleHeader',
-                content: {
-                    logoUrl: 'https://mcusercontent.com/d76819924b4f0773791d6827b/images/66b9f1d7-4f68-f6ac-a802-885c31858105.jpg',
-                    websiteUrl: 'https://www.catalyst-magazine.com/',
-                    maxWidth: '660px',
-                    backgroundColor: '#ffffff'
-                }
-            },
-            {
-                type: 'cleanArticle',
-                content: {
-                    title: 'The Future of STEM Education',
-                    description: 'Exploring innovative approaches to science, technology, engineering, and mathematics education.',
+                    title: 'Breaking: New Quantum Computing Breakthrough',
+                    description: 'Scientists achieve major milestone in quantum computing that could revolutionize data processing.',
                     ctaText: 'Learn More',
-                    ctaUrl: '#',
-                    padding: '30px 24px'
+                    ctaUrl: '#'
                 }
             },
             {
-                type: 'minimalFooter',
+                type: 'article',
                 content: {
-                    text: 'Unsubscribe',
-                    url: '#',
-                    fontSize: '10px',
-                    textAlign: 'center',
-                    backgroundColor: '#ffffff'
+                    title: 'Sustainable Energy Solutions for 2024',
+                    description: 'Discover the innovative approaches to renewable energy that are gaining traction worldwide.',
+                    ctaText: 'Explore',
+                    ctaUrl: '#'
+                }
+            },
+            {
+                type: 'footer',
+                content: {
+                    companyName: 'The STEM Report',
+                    address: '456 Innovation Ave, Future City, FC 67890',
+                    unsubscribeText: 'Update preferences or unsubscribe'
+                }
+            }
+        ]
+    },
+
+    minimal: {
+        name: 'Minimal',
+        structure: [
+            {
+                type: 'header',
+                content: {
+                    title: 'STEM Digest',
+                    subtitle: '',
+                    backgroundColor: '#ffffff',
+                    textColor: '#333333',
+                    borderBottom: '3px solid #6c757d'
+                }
+            },
+            {
+                type: 'article',
+                content: {
+                    title: 'Featured Article: The Future of Biotechnology',
+                    description: 'An in-depth look at how biotechnology is transforming medicine, agriculture, and environmental science.',
+                    ctaText: 'Read Article',
+                    ctaUrl: '#',
+                    layout: 'minimal'
+                }
+            },
+            {
+                type: 'text',
+                content: {
+                    text: 'Quick Links: Recent Publications | Research Database | Subscribe to Updates',
+                    fontSize: '14px',
+                    color: '#666666',
+                    textAlign: 'center'
+                }
+            },
+            {
+                type: 'footer',
+                content: {
+                    companyName: 'STEM Digest',
+                    address: '',
+                    unsubscribeText: 'Unsubscribe',
+                    minimal: true
+                }
+            }
+        ]
+    },
+    catalyst_v1: {
+        name: 'Catalyst V1',
+        structure: [
+            {
+                type: 'header',
+                content: {
+                    imageUrl: 'https://ci3.googleusercontent.com/meips/ADKq_NbgAwWYM_MMSu5omcK5--beMjfR_An8j288ytZQKGZsUQSJ_rdf97s-i8YNkX-lyRIin0c7rRuKXtNBzqM3lNiv1m1KxbGZKL0SWmmZIsF_lHclQyhr6KWC0mkVDS5stCAmqnhjHJppX3XN1pYmb88UsH8JV7FxEfE=s0-d-e1-ft#https://mcusercontent.com/d76819924b4f0773791d6827b/images/66b9f1d7-4f68-f6ac-a802-885c31858105.jpg',
+                    link: 'https://www.catalyst-magazine.com/'
+                }
+            },
+            {
+                type: 'text',
+                content: {
+                    text: 'A scientist\'s path is rarely a straight line; sometimes the most profound work begins with an unexpected crisis. <br><br> This edition of Catalyst shares stories of ingenuity born from necessity. We feature a pioneer whose harrowing illness redefined the field of biosecurity, a researcher uncovering how coastal forests adapt to survive, and an innovator whose work is creating a more sustainable and equitable world.<br><br>Read on and rediscover the joy of curiosity.',
+                    backgroundColor: '#2c2c2e',
+                    textColor: '#ffffff',
+                    borderRadius: '30px',
+                    padding: '18px 24px'
+                }
+            },
+            {
+                type: 'article',
+                content: {
+                    title: 'From Battling a Bioweapon Pathogen to Pioneering Global Health Security',
+                    description: 'A battle with a rare, weaponized pathogen led Dr. Rebecca Katz to pioneer the field of global health security. From advising on post-9/11 attacks to COVID-19, Katz remains a critical expert shaping public health and national defense.',
+                    imageUrl: 'https://ci3.googleusercontent.com/meips/ADKq_NbE-6OfNMsUi_pzBjCHJ8Th8gZ2UWUigX_Kktl2CDLdDxhNgEnmq1K_tcigVS3um7DgAOMXflFUV0qLCQPnoiOZRPgaB2IzseKt__Bzeezz-LBXhHmeAOIXQGgn-Y38TZZag41sOws7qhfLjectoJdhsw89Pl4OcNix=s0-d-e1-ft#https://mcusercontent.com/d76819924b4f0773791d6827b/images/75a6eef0-fc3d-d3dd-7816-46ff5270a673.jpeg',
+                    ctaText: 'See more',
+                    ctaUrl: 'https://www.catalyst-magazine.com/post/reframing-health-as-a-national-security-issue',
+                    imageLeft: true
+                }
+            },
+            {
+                type: 'article',
+                content: {
+                    title: 'Designing a Sustainable Future with Sun, Wind, and Water',
+                    description: 'For innovator Scott Sklar, renewable energy is about more than the grid, it\'s about human impact. His vision is for a practical and accessible energy future.',
+                    imageUrl: 'https://ci3.googleusercontent.com/meips/ADKq_NY0mX0MjUrchH53JswSqcxOoqZogPpSxp6lJt9Miw4H9a5lmxl-dIbwiwG0YLviZhfCy7Q1OJlSiCGGCb6vHFCwQfWZUjyrh-Jl555tk3qt5G0yvs-57kvD9MYWXWoIJFBGAyP80mg1tQkotRDQeCXGHhHK7-WlTGOu=s0-d-e1-ft#https://mcusercontent.com/d76819924b4f0773791d6827b/images/2479cf95-1358-74d5-ad9b-fc5767e0b760.jpeg',
+                    ctaText: 'See more',
+                    ctaUrl: 'https://www.catalyst-magazine.com/post/designing-a-sustainable-future-with-sun-wind-and-water',
+                    imageLeft: false
+                }
+            },
+            {
+                type: 'brainTeaser',
+                content: {
+                    title: 'Solve Our Brain Teaser',
+                    question: 'A man is asked about his children. He replies with two curious statements:<br><br><i>"Every son I have has the same number of brothers as he has sisters."</i><br><br><i>"Every daughter I have has twice as many brothers as she has sisters."</i><br><br>How many sons and daughters does the man have?',
+                    imageUrl: 'https://ci3.googleusercontent.com/meips/ADKq_NbUnHkUSjlsnm3Jv7NKBhk1byklJyqOK3LSNMbHQrqCpfdmJgfCz1Dw6en83pVY2EzIcwAhVtW8-ARNMtBmehIilYtnIXKSPydnWAVQblCSx-PfD_QkOHtFFHBC0hCx2NicI05bjHWkxx18JOAAa_gFTrM8QQppLG2k=s0-d-e1-ft#https://mcusercontent.com/d76819924b4f0773791d6827b/images/7d3828a4-5525-72a0-6b9c-7426b23c1595.jpeg',
+                    ctaText: 'Submit Your Answer',
+                    ctaUrl: 'https://www.catalyst-magazine.com/#teaser'
+                }
+            },
+            {
+                type: 'footer',
+                content: {
+                    companyName: 'catalyst-magazine.com',
+                    companyUrl: 'http://catalyst-magazine.com/',
+                    socialLinks: [
+                        { platform: 'linkedin', url: 'https://www.linkedin.com/company/the-catalyst-stem-magazine' },
+                        { platform: 'instagram', url: 'https://www.instagram.com/thecatalyst_dc' }
+                    ]
+                }
+            }
+        ]
+    },
+    catalyst_v2: {
+        name: 'Catalyst V2',
+        structure: [
+            {
+                type: 'header',
+                content: {
+                    imageUrl: 'https://ci3.googleusercontent.com/meips/ADKq_NbgAwWYM_MMSu5omcK5--beMjfR_An8j288ytZQKGZsUQSJ_rdf97s-i8YNkX-lyRIin0c7rRuKXtNBzqM3lNiv1m1KxbGZKL0SWmmZIsF_lHclQyhr6KWC0mkVDS5stCAmqnhjHJppX3XN1pYmb88UsH8JV7FxEfE=s0-d-e1-ft#https://mcusercontent.com/d76819924b4f0773791d6827b/images/66b9f1d7-4f68-f6ac-a802-885c31858105.jpg',
+                    link: 'https://catalyst-magazine.com/'
+                }
+            },
+            {
+                type: 'text',
+                content: {
+                    text: '<em>In this issue, we break down real-world science, from Dr. Song Gao’s take on how atmospheric chemistry meets policy to Tyler Wyka’s work on decarbonizing energy systems. We also uncover the genetics behind insect coloration and explore why you can’t tickle yourself silly.</em><br><br><em>As <strong>Albert Einstein</strong> once said, “I have no special talent. I am only passionately curious.” Let that spark your curiosity, and dive into the articles below!</em>',
+                    backgroundColor: '#2c2c2e',
+                    textColor: '#ffffff',
+                    borderRadius: '30px',
+                    padding: '18px 24px'
+                }
+            },
+            {
+                type: 'article',
+                content: {
+                    title: 'Pollution to Solution: Dr. Song Gao on Environmental Sustainability',
+                    description: 'Dr. Song Gao bridges science and policy to tackle climate change. From aerosols to ozone, his work reveals how atmospheric chemistry and flexible international agreements like the Montreal Protocol can shape real-world sustainability and environmental solutions.',
+                    imageUrl: 'https://ci3.googleusercontent.com/meips/ADKq_NYV1ZpPcHjRVY0d2y1r-hjgIUTXgIbwQcG5_JuNWCrd7Rvl9Aecmi8auARj6K6GHaVmo0IrmJyBf4JmAqqeajVAL4oaFUB-s3yF3z4l05n6U3_0n8QpGtMA334Oixf3G8CimWMoNsR5DEHEzHe6mLawfASCuZWDDKlN=s0-d-e1-ft#https://mcusercontent.com/d76819924b4f0773791d6827b/images/8ee205f5-06ff-99e6-b269-f8e4e0d9d1e8.jpeg',
+                    ctaText: 'See more',
+                    ctaUrl: 'https://www.catalyst-magazine.com/post/pollution-to-solution-dr-song-gao-on-science-policy-and-environmental-sustainability',
+                    imageLeft: true
+                }
+            },
+            {
+                type: 'article',
+                content: {
+                    title: 'How One Engineer is Changing Sustainable Fuels',
+                    description: 'Tyler Wyka blends engineering, policy, and global collaboration to tackle climate change. From turbine fuel research to building solar infrastructure in Sierra Leone, his journey shows how curiosity, innovation, and interdisciplinary action can drive sustainable change.',
+                    imageUrl: 'https://ci3.googleusercontent.com/meips/ADKq_NbUV3iE24tnoSnOchHSVHd3tzMrR8eLrhdF9hskQ-mFfVdthM_jV903wEplWy60RvYaw9y-hcjur_Lrc3jBizdP_hj9Bv6BwticggTfzHf_mSfm7pDbdhh1vAjBVIFCtU_50DmSMKkGl885rDps9-MAJvZMV4wQQHY9=s0-d-e1-ft#https://mcusercontent.com/d76819924b4f0773791d6827b/images/c4e38886-74cc-51f5-1784-01e9ea397787.jpeg',
+                    ctaText: 'See more',
+                    ctaUrl: 'https://www.catalyst-magazine.com/post/how-one-engineer-is-changing-sustainable-fuels',
+                    imageLeft: false
+                }
+            },
+            {
+                type: 'brainTeaser',
+                content: {
+                    title: 'The Elevator Escape',
+                    question: 'An elevator is on the ground floor. There are four people in the elevator including me. When the lift reaches the first floor, one person gets out and three people get in. The lift goes up to the second floor, two people get out, six people get in. It then goes up to the next floor, no one gets out but 12 people get in. Halfway up to the next floor, the elevator cable <strong>snaps</strong>. It crashes to the floor. Everyone else dies in the elevator except me.<br><br><em><strong>How did I survive?</strong></em>',
+                    imageUrl: 'https://ci3.googleusercontent.com/meips/ADKq_NaPT4Nak-HNyFS_F-1hiMSHpU98TCgPsxrDfSgJAl2ZZJ1PZv98UKqfzQdqQaGZjKq0rm3ASHA8JQX1i4DgIrG-IQNsxwqR2vOFItUZHriW0sfCgMhtgl_6CCq3sIWdKZq_3OCMTAct5C-qgEI0JPrzv6LM-3mJjcdG=s0-d-e1-ft#https://mcusercontent.com/d76819924b4f0773791d6827b/images/ce0579ed-9b2e-d587-e8bd-e1ca22e3fb51.jpeg',
+                    ctaText: 'Submit Your Answer',
+                    ctaUrl: 'https://www.catalyst-magazine.com/#teaser'
+                }
+            },
+            {
+                type: 'footer',
+                content: {
+                    companyName: 'catalyst-magazine.com',
+                    companyUrl: 'http://catalyst-magazine.com/',
+                    socialLinks: [
+                        { platform: 'linkedin', url: 'https://www.linkedin.com/company/the-catalyst-stem-magazine' },
+                        { platform: 'instagram', url: 'https://www.instagram.com/thecatalyst_dc' }
+                    ],
+                    unsubscribeUrl: 'https://www.catalyst-magazine.com/unsubscribe'
                 }
             }
         ]
     }
 };
 
-// Enhanced Template Renderer matching your design
+// Template renderer functions
 const TemplateRenderer = {
     renderHeader(content) {
-        const containerStyle = `
-            margin: 0px auto;
-            max-width: 660px;
-        `;
-        
-        const tableStyle = `
-            width: 100%;
-            border-collapse: collapse;
-        `;
-        
-        const cellStyle = `
-            direction: ltr;
-            font-size: 0px;
-            padding: 20px;
-            text-align: center;
-        `;
-        
-        const leftColumnStyle = `
-            font-size: 0px;
-            text-align: left;
-            direction: ltr;
-            display: inline-block;
-            vertical-align: middle;
-            width: 50%;
-        `;
-        
-        const rightColumnStyle = `
-            font-size: 0px;
-            text-align: left;
-            direction: ltr;
-            display: inline-block;
-            vertical-align: top;
-            width: 50%;
-        `;
-
-        return `
-            <div style="${containerStyle}">
-                <table align="center" border="0" cellpadding="0" cellspacing="0" role="presentation" style="${tableStyle}">
-                    <tbody>
-                        <tr>
-                            <td style="${cellStyle}">
-                                <div style="${leftColumnStyle}">
-                                    <table border="0" cellpadding="0" cellspacing="0" role="presentation" width="100%">
-                                        <tbody>
-                                            <tr>
-                                                <td style="vertical-align: middle; padding: 10px;">
-                                                    <a href="${content.websiteUrl}" style="font-family: 'DM Sans', sans-serif; font-size: 16px; font-weight: bold; color: ${content.textColor || '#2b2b2b'}; text-decoration: none;" target="_blank">
-                                                        ${content.websiteText || 'catalyst-magazine.com'}
-                                                    </a>
-                                                </td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                                <div style="${rightColumnStyle}">
-                                    <table border="0" cellpadding="0" cellspacing="0" role="presentation" width="100%">
-                                        <tbody>
-                                            <tr>
-                                                <td style="vertical-align: top; padding: 0;">
-                                                    <a href="${content.websiteUrl}" target="_blank">
-                                                        <img alt="Catalyst Magazine Logo" src="${content.logoUrl}" style="border: 0; display: block; outline: none; text-decoration: none; height: auto; width: 100%; max-width: 660px;" width="660">
-                                                    </a>
-                                                </td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        `;
-    },
-
-    renderBrandHeader(content) {
-        return `
-            <tbody>
-                <tr>
-                    <td style="direction: ltr; font-size: 0px; padding: 20px 0; text-align: center;">
-                        <div style="margin: 0px auto; max-width: 660px;">
-                            <table align="center" border="0" cellpadding="0" cellspacing="0" role="presentation" style="width: 100%;">
-                                <tbody>
-                                    <tr>
-                                        <td style="direction: ltr; font-size: 0px; padding: 0; text-align: center;">
-                                            <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%">
-                                                <tbody>
-                                                    <tr>
-                                                        <td style="font-size: 0px; word-break: break-word;">
-                                                            <a href="${content.websiteUrl}" style="word-break: break-word; display: block;" target="_blank">
-                                                                <img alt="Catalyst Magazine Logo" src="${content.logoUrl}" style="border: 0; display: block; outline: none; text-decoration: none; height: auto; width: 100%; max-width: 660px;" width="660">
-                                                            </a>
-                                                        </td>
-                                                    </tr>
-                                                </tbody>
-                                            </table>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </td>
-                </tr>
-            </tbody>
-        `;
-    },
-
-    renderSimpleHeader(content) {
-        return `
-            <tbody>
-                <tr>
-                    <td style="direction: ltr; font-size: 0px; padding: 20px 0; text-align: center;">
-                        <div style="margin: 0px auto; max-width: ${content.maxWidth || '660px'};">
-                            <table align="center" border="0" cellpadding="0" cellspacing="0" role="presentation" style="width: 100%;">
-                                <tbody>
-                                    <tr>
-                                        <td style="direction: ltr; font-size: 0px; padding: 0; text-align: center;">
-                                            <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%">
-                                                <tbody>
-                                                    <tr>
-                                                        <td style="font-size: 0px; word-break: break-word;">
-                                                            <a href="${content.websiteUrl}" style="word-break: break-word; display: block;" target="_blank">
-                                                                <img alt="Catalyst Magazine Logo" src="${content.logoUrl}" style="border: 0; display: block; outline: none; text-decoration: none; height: auto; width: 100%; max-width: 660px;" width="660">
-                                                            </a>
-                                                        </td>
-                                                    </tr>
-                                                </tbody>
-                                            </table>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </td>
-                </tr>
-            </tbody>
-        `;
-    },
-
-    renderDottedDivider() {
-        return `
-            <tr>
-                <td style="padding: 30px 24px 0 24px;">
-                    <table role="presentation" style="border-top: 1px dotted #000000; width: 100%;" width="100%" cellspacing="0" cellpadding="0" border="0">
-                        <tbody>
-                            <tr>
-                                <td></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </td>
-            </tr>
-        `;
-    },
-
-    renderFeaturedArticle(content) {
-        return `
-            <table width="100%" cellpadding="0" cellspacing="0" border="0" style="background-color: #ffffff;">
-                <tr>
-                    <td style="padding: 40px 30px;">
-                        ${content.imageUrl ? `
-                            <img src="${content.imageUrl}" alt="${content.title}" style="width: 100%; height: auto; border-radius: 8px; margin-bottom: 25px; display: block;">
-                        ` : ''}
-                        <h2 style="margin: 0 0 20px 0; font-size: 24px; font-weight: bold; color: #000000; line-height: 1.3; font-family: 'DM Sans', Arial, sans-serif;">
-                            ${content.title}
-                        </h2>
-                        <p style="margin: 0 0 25px 0; font-size: 16px; color: #666666; line-height: 1.6; font-family: 'DM Sans', Arial, sans-serif;">
-                            ${content.description}
-                        </p>
-                        ${content.ctaText && content.ctaUrl ? `
-                            <table role="presentation" cellspacing="0" cellpadding="0" border="0">
-                                <tr>
-                                    <td style="background-color: #007bff; border-radius: 6px;">
-                                        <a href="${content.ctaUrl}" style="display: inline-block; color: #ffffff; text-decoration: none; padding: 14px 28px; font-weight: 500; font-size: 16px; font-family: 'DM Sans', Arial, sans-serif; border-radius: 6px;">
-                                            ${content.ctaText}
-                                        </a>
-                                    </td>
-                                </tr>
-                            </table>
-                        ` : ''}
-                    </td>
-                </tr>
-            </table>
-        `;
-    },
-
-    renderTwoColumnArticle(content) {
-        return `
-            <div style="margin: 0px auto; max-width: 660px;">
-                <table align="center" border="0" cellpadding="0" cellspacing="0" role="presentation" style="width: 100%;">
-                    <tbody>
-                        <tr>
-                            <td style="direction: ltr; font-size: 0px; padding: 20px; text-align: center;">
-                                <div style="font-size: 0px; text-align: left; direction: ltr; display: inline-block; vertical-align: middle; width: 50%;">
-                                    <table border="0" cellpadding="0" cellspacing="0" role="presentation" width="100%">
-                                        <tbody>
-                                            <tr>
-                                                <td style="vertical-align: middle; padding: 10px;">
-                                                    <h3 style="margin: 0 0 15px 0; font-size: 20px; font-weight: bold; color: #000000; font-family: 'DM Sans', Arial, sans-serif;">
-                                                        ${content.leftColumn.title}
-                                                    </h3>
-                                                    <p style="margin: 0 0 20px 0; font-size: 16px; color: #666666; line-height: 1.5; font-family: 'DM Sans', Arial, sans-serif;">
-                                                        ${content.leftColumn.description}
-                                                    </p>
-                                                    ${content.leftColumn.ctaText ? `
-                                                        <a href="${content.leftColumn.ctaUrl}" style="display: inline-block; background-color: #007bff; color: #ffffff; text-decoration: none; padding: 12px 24px; border-radius: 6px; font-weight: 500; font-size: 14px; font-family: 'DM Sans', Arial, sans-serif;">
-                                                            ${content.leftColumn.ctaText}
-                                                        </a>
-                                                    ` : ''}
-                                                </td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                                <div style="font-size: 0px; text-align: left; direction: ltr; display: inline-block; vertical-align: top; width: 50%;">
-                                    <table border="0" cellpadding="0" cellspacing="0" role="presentation" width="100%">
-                                        <tbody>
-                                            <tr>
-                                                <td style="vertical-align: top; padding: 0;">
-                                                    <img src="${content.rightColumn.imageUrl}" alt="${content.rightColumn.altText}" style="width: 100%; height: auto; border-radius: 8px; display: block;">
-                                                </td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        `;
-    },
-
-    renderArticleGrid(content) {
-        const articlesHtml = content.articles.map(article => `
-            <div style="font-size: 0px; text-align: left; direction: ltr; display: inline-block; vertical-align: top; width: 50%;">
-                <table border="0" cellpadding="0" cellspacing="0" role="presentation" width="100%">
-                    <tbody>
-                        <tr>
-                            <td style="padding: 15px;">
-                                <img src="${article.imageUrl}" alt="${article.title}" style="width: 100%; height: auto; border-radius: 8px; margin-bottom: 15px; display: block;">
-                                <h4 style="margin: 0 0 10px 0; font-size: 18px; font-weight: bold; color: #000000; line-height: 1.3; font-family: 'DM Sans', Arial, sans-serif;">
-                                    ${article.title}
-                                </h4>
-                                <p style="margin: 0 0 15px 0; font-size: 14px; color: #666666; line-height: 1.5; font-family: 'DM Sans', Arial, sans-serif;">
-                                    ${article.description}
-                                </p>
-                                <a href="${article.ctaUrl}" style="display: inline-block; background-color: #007bff; color: #ffffff; text-decoration: none; padding: 10px 20px; border-radius: 6px; font-weight: 500; font-size: 14px; font-family: 'DM Sans', Arial, sans-serif;">
-                                    Read More
-                                </a>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        `).join('');
-
-        return `
-            <div style="margin: 0px auto; max-width: 660px;">
-                <table align="center" border="0" cellpadding="0" cellspacing="0" role="presentation" style="width: 100%;">
-                    <tbody>
-                        <tr>
-                            <td style="direction: ltr; font-size: 0px; padding: 20px; text-align: center;">
-                                ${articlesHtml}
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        `;
-    },
-
-    renderCleanArticle(content) {
-        return `
-            <table width="100%" cellpadding="0" cellspacing="0" border="0" style="background-color: #ffffff;">
-                <tr>
-                    <td style="padding: ${content.padding || '30px 24px'};">
-                        <h2 style="margin: 0 0 20px 0; font-size: 22px; font-weight: bold; color: #000000; line-height: 1.3; font-family: 'DM Sans', Arial, sans-serif;">
-                            ${content.title}
-                        </h2>
-                        <p style="margin: 0 0 25px 0; font-size: 16px; color: #666666; line-height: 1.6; font-family: 'DM Sans', Arial, sans-serif;">
-                            ${content.description}
-                        </p>
-                        ${content.ctaText && content.ctaUrl ? `
-                            <a href="${content.ctaUrl}" style="display: inline-block; background-color: #007bff; color: #ffffff; text-decoration: none; padding: 12px 24px; border-radius: 6px; font-weight: 500; font-size: 14px; font-family: 'DM Sans', Arial, sans-serif;">
-                                ${content.ctaText}
+        if (content.imageUrl) {
+            return `
+                <table width="100%" cellpadding="0" cellspacing="0" border="0">
+                    <tr>
+                        <td style="padding: 20px 0; text-align: center;">
+                            <a href="${content.link}" target="_blank">
+                                <img src="${content.imageUrl}" alt="Header Image" style="max-width: 660px; width: 100%; height: auto; display: block;">
                             </a>
+                        </td>
+                    </tr>
+                </table>
+            `;
+        }
+        const style = `
+            background-color: ${content.backgroundColor || '#007bff'};
+            color: ${content.textColor || '#ffffff'};
+            padding: 30px 20px;
+            text-align: center;
+            ${content.borderBottom ? `border-bottom: ${content.borderBottom};` : ''}
+        `;
+
+        return `
+            <table width="100%" cellpadding="0" cellspacing="0" border="0" style="${style}">
+                <tr>
+                    <td>
+                        <h1 style="margin: 0; font-size: 28px; font-weight: 700; font-family: 'DM Sans', Arial, sans-serif;">
+                            ${content.title}
+                        </h1>
+                        ${content.subtitle ? `
+                            <p style="margin: 10px 0 0 0; font-size: 16px; opacity: 0.9; font-family: 'DM Sans', Arial, sans-serif;">
+                                ${content.subtitle}
+                            </p>
                         ` : ''}
                     </td>
                 </tr>
@@ -434,30 +310,34 @@ const TemplateRenderer = {
     },
 
     renderArticle(content) {
-        const containerStyle = `
-            padding: 30px 20px;
-            border-bottom: 1px solid #e9ecef;
+        const imagePart = `
+            <td width="50%" style="vertical-align: top; padding: 0;">
+                <a href="${content.ctaUrl}" target="_blank">
+                    <img src="${content.imageUrl}" alt="${content.title}" style="width: 100%; height: auto; display: block; border-radius: ${content.imageLeft ? '30px 0 0 30px' : '0 30px 30px 0'};">
+                </a>
+            </td>
+        `;
+
+        const textPart = `
+            <td width="50%" style="vertical-align: top; padding: 20px 16px;">
+                <p style="margin: 0; padding: 0; font-family: 'DM Sans', sans-serif; font-size: 20px; line-height: 1.25; font-weight: bold; color: #000000;">${content.title}</p>
+                <p style="margin: 10px 0 0 0; padding: 0; font-family: 'DM Sans', sans-serif; font-size: 13px; line-height: 1.5; color: #000000;">${content.description}</p>
+                <table border="0" cellpadding="0" cellspacing="0" role="presentation" style="margin-top: 15px;">
+                    <tr>
+                        <td align="left" bgcolor="#000000" role="presentation" style="background: #000000; border-radius: 50px;">
+                            <a href="${content.ctaUrl}" target="_blank" style="display: inline-block; background: #000000; color: #ffffff; font-family: 'DM Sans', sans-serif; font-size: 15px; font-weight: normal; line-height: 100%; margin: 0; text-decoration: none; text-transform: none; padding: 12px 28px; border-radius: 50px;">
+                                ${content.ctaText}
+                            </a>
+                        </td>
+                    </tr>
+                </table>
+            </td>
         `;
 
         return `
-            <table width="100%" cellpadding="0" cellspacing="0" border="0" style="${containerStyle}">
+            <table width="100%" cellpadding="0" cellspacing="0" border="0" style="padding: 20px;">
                 <tr>
-                    <td>
-                        ${content.imageUrl ? `
-                            <img src="${content.imageUrl}" alt="Article Image" style="width: 100%; height: auto; border-radius: 8px; margin-bottom: 20px; display: block;">
-                        ` : ''}
-                        <h2 style="margin: 0 0 15px 0; font-size: 22px; font-weight: bold; color: #000000; line-height: 1.3; font-family: 'DM Sans', Arial, sans-serif;">
-                            ${content.title}
-                        </h2>
-                        <p style="margin: 0 0 20px 0; font-size: 16px; color: #666666; line-height: 1.6; font-family: 'DM Sans', Arial, sans-serif;">
-                            ${content.description}
-                        </p>
-                        ${content.ctaText && content.ctaUrl ? `
-                            <a href="${content.ctaUrl}" style="display: inline-block; background-color: #007bff; color: #ffffff; text-decoration: none; padding: 12px 24px; border-radius: 6px; font-weight: 500; font-size: 14px; font-family: 'DM Sans', Arial, sans-serif;">
-                                ${content.ctaText}
-                            </a>
-                        ` : ''}
-                    </td>
+                    ${content.imageLeft ? imagePart + textPart : textPart + imagePart}
                 </tr>
             </table>
         `;
@@ -468,27 +348,17 @@ const TemplateRenderer = {
         const style = `
             padding: 20px;
             text-align: ${textAlign};
+            background-color: ${content.backgroundColor || 'transparent'};
+            border-radius: ${content.borderRadius || '0'};
         `;
 
         return `
             <table width="100%" cellpadding="0" cellspacing="0" border="0" style="${style}">
                 <tr>
-                    <td>
-                        <p style="margin: 0; font-size: ${content.fontSize || '16px'}; color: ${content.color || '#333333'}; line-height: 1.6; font-family: 'DM Sans', Arial, sans-serif;">
+                    <td style="padding: ${content.padding || '0'}">
+                        <p style="margin: 0; font-size: ${content.fontSize || '16px'}; color: ${content.textColor || '#333333'}; line-height: 1.6; font-family: 'DM Sans', Arial, sans-serif;">
                             ${content.text}
                         </p>
-                    </td>
-                </tr>
-            </table>
-        `;
-    },
-
-    renderImage(content) {
-        return `
-            <table width="100%" cellpadding="0" cellspacing="0" border="0">
-                <tr>
-                    <td style="padding: 20px;">
-                        <img src="${content.imageUrl}" alt="${content.altText || 'Image'}" style="width: 100%; height: auto; border-radius: 8px; display: block;">
                     </td>
                 </tr>
             </table>
@@ -522,61 +392,102 @@ const TemplateRenderer = {
             </table>
         `;
     },
-
-    renderFooter(content) {
+    renderBrainTeaser(content) {
         return `
-            <table width="100%" cellpadding="0" cellspacing="0" border="0" style="background-color: ${content.backgroundColor || '#ebebeb'}; padding: 40px 30px; text-align: center;">
+            <table width="100%" cellpadding="0" cellspacing="0" border="0" style="padding: 20px; text-align: center;">
                 <tr>
                     <td>
-                        <p style="margin: 0 0 15px 0; font-size: 16px; color: #333333; font-weight: 600; font-family: 'DM Sans', Arial, sans-serif;">
-                            ${content.companyName}
-                        </p>
-                        <p style="margin: 0; font-size: 12px; color: ${content.textColor || '#666666'}; font-family: 'DM Sans', Arial, sans-serif; line-height: 1.5;">
-                            © ${new Date().getFullYear()} ${content.companyName}. All rights reserved.
-                            <br><br>
-                            <a href="${content.websiteUrl}" style="color: #007bff; text-decoration: none;">
-                                Visit our website
-                            </a>
-                            |
-                            <a href="${content.unsubscribeUrl}" style="color: #007bff; text-decoration: none;">
-                                Unsubscribe
-                            </a>
-                        </p>
+                        <h1 style="margin: 0; padding: 0; font-family: 'DM Sans', sans-serif; font-size: 31px; line-height: 1.5; letter-spacing: 0px;">${content.title}</h1>
+                        <table width="100%" cellpadding="0" cellspacing="0" border="0" style="margin-top: 20px;">
+                            <tr>
+                                <td width="50%" style="vertical-align: middle; padding: 10px;">
+                                    <img src="${content.imageUrl}" alt="Brain Teaser" style="width: 100%; max-width: 280px; height: auto; border-radius: 40px; display: block; margin: 0 auto;">
+                                </td>
+                                <td width="50%" style="vertical-align: middle; padding: 10px; text-align: left; font-family: 'DM Sans', sans-serif; font-size: 14px; line-height: 1.5; color: #000000;">
+                                    ${content.question}
+                                </td>
+                            </tr>
+                        </table>
+                        <table border="0" cellpadding="0" cellspacing="0" role="presentation" style="margin: 20px auto 0 auto;">
+                            <tr>
+                                <td align="center" bgcolor="#2B2B2B" role="presentation" style="background: #2b2b2b; border-radius: 50px;">
+                                    <a href="${content.ctaUrl}" target="_blank" style="display: inline-block; background: #2b2b2b; color: #ffffff; font-family: 'DM Sans', sans-serif; font-size: 15px; font-weight: bold; line-height: 100%; margin: 0; text-decoration: none; text-transform: none; padding: 16px 28px; border-radius: 50px;">
+                                        ${content.ctaText}
+                                    </a>
+                                </td>
+                            </tr>
+                        </table>
                     </td>
                 </tr>
             </table>
         `;
     },
+    renderFooter(content) {
+        if (content.companyUrl) { // Catalyst footer
+            const socialLinks = (content.socialLinks || []).map(link => `
+                <td style="padding: 0 8px;">
+                    <a href="${link.url}" target="_blank">
+                        <img src="http://googleusercontent.com/profile/picture/${link.platform === 'linkedin' ? '8' : '1'}" alt="${link.platform}" width="24" height="24" style="border: 0; border-radius: 3px; display: block;">
+                    </a>
+                </td>
+            `).join('');
 
-    renderRoundedFooter(content) {
-        return `
-            <table width="100%" style="border: 0px; background-color: ${content.backgroundColor || '#ffffff'}; border-radius: 0px 0px ${content.borderRadius || '40px'} ${content.borderRadius || '40px'};">
-                <tbody>
+            return `
+                <table width="100%" cellpadding="0" cellspacing="0" border="0" style="padding: 20px;">
                     <tr>
-                        <td style="word-break: break-word; padding: 12px 0px 0px;">
-                            <div style="font-family: 'DM Sans', sans-serif; color: rgb(0,0,0); width: 657px;">
-                                <p style="margin: 0px; padding: 0px; word-break: break-word; font-size: 16px; line-height: 1.5; text-align: center; letter-spacing: 0px; direction: ltr;">
-                                    <a href="${content.unsubscribeUrl}" style="color: rgb(0,0,0); word-break: break-word; direction: ltr;" target="_blank">
-                                        <span style="font-size: 10px;">${content.unsubscribeText || 'Unsubscribe'}</span>
-                                    </a>
-                                </p>
-                            </div>
+                        <td width="50%" style="text-align: left;">
+                             <a href="${content.companyUrl}" style="font-family:'DM Sans',sans-serif;font-size:16px;font-weight:bold;color:#2b2b2b;text-decoration:none" target="_blank">${content.companyName}</a>
+                        </td>
+                        <td width="50%" style="text-align: right;">
+                             <table border="0" cellpadding="0" cellspacing="0" role="presentation" style="display: inline-block;">
+                                <tr>
+                                    ${socialLinks}
+                                </tr>
+                             </table>
                         </td>
                     </tr>
-                </tbody>
-            </table>
-        `;
-    },
+                     ${content.unsubscribeUrl ? `
+                        <tr>
+                            <td colspan="2" style="text-align: center; padding-top: 20px; font-size: 12px; color: #666666; font-family: 'DM Sans', Arial, sans-serif;">
+                                <a href="${content.unsubscribeUrl}" style="color: #007bff; text-decoration: none;">Unsubscribe</a>
+                            </td>
+                        </tr>
+                    ` : ''}
+                </table>
+            `;
+        }
+        
+        // Original footers
+        if (content.minimal) {
+            return ` <table width="100%" cellpadding="0" cellspacing="0" border="0" style="background-color: #f8f9fa; padding: 20px; text-align: center;">
+                    <tr>
+                        <td>
+                            <p style="margin: 0; font-size: 12px; color: #666666; font-family: 'DM Sans', Arial, sans-serif;">
+                                © ${new Date().getFullYear()} ${content.companyName}
+                                ${content.unsubscribeText ? ` | <a href="#" style="color: #007bff; text-decoration: none;">${content.unsubscribeText}</a>` : ''}
+                            </p>
+                        </td>
+                    </tr>
+                </table>
+            `;
+        }
 
-    renderMinimalFooter(content) {
         return `
-            <table width="100%" cellpadding="0" cellspacing="0" border="0" style="background-color: ${content.backgroundColor || '#ffffff'}; padding: 20px; text-align: ${content.textAlign || 'center'};">
+            <table width="100%" cellpadding="0" cellspacing="0" border="0" style="background-color: #f8f9fa; padding: 30px 20px; text-align: center;">
                 <tr>
                     <td>
-                        <p style="margin: 0; font-size: ${content.fontSize || '10px'}; color: #000000; font-family: 'DM Sans', Arial, sans-serif;">
-                            <a href="${content.url}" style="color: #000000; text-decoration: none;">
-                                ${content.text}
-                            </a>
+                        <p style="margin: 0 0 10px 0; font-size: 14px; color: #333333; font-weight: 600; font-family: 'DM Sans', Arial, sans-serif;">
+                            ${content.companyName}
+                        </p>
+                        ${content.address ? `
+                            <p style="margin: 0 0 15px 0; font-size: 12px; color: #666666; font-family: 'DM Sans', Arial, sans-serif;">
+                                ${content.address}
+                            </p>
+                        ` : ''}
+                        <p style="margin: 0; font-size: 12px; color: #666666; font-family: 'DM Sans', Arial, sans-serif;">
+                            © ${new Date().getFullYear()} ${content.companyName}. All rights reserved.
+                            <br>
+                            <a href="#" style="color: #007bff; text-decoration: none;">${content.unsubscribeText}</a>
                         </p>
                     </td>
                 </tr>
