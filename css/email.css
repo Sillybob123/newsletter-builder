@@ -1,118 +1,74 @@
-/* Email-Safe CSS - Inline styles will be generated */
-.email-container {
-    max-width: 600px;
-    margin: 0 auto;
-    font-family: 'DM Sans', Arial, sans-serif;
-    background-color: #ffffff;
-}
+/* Email-Safe CSS - These styles are for the builder's preview canvas */
 
-.email-header {
-    background-color: #007bff;
-    color: #ffffff;
-    padding: 20px;
-    text-align: center;
-}
-
-.email-header h1 {
-    margin: 0;
-    font-size: 24px;
-    font-weight: 700;
-}
-
-.email-content {
-    padding: 20px;
-}
-
-.article-block {
-    margin-bottom: 30px;
-    border-bottom: 1px solid #e9ecef;
-    padding-bottom: 20px;
-}
-
-.article-block:last-child {
-    border-bottom: none;
-    margin-bottom: 0;
-}
-
-.article-title {
-    font-size: 20px;
-    font-weight: bold;
-    color: #000000;
-    margin-bottom: 10px;
-    line-height: 1.25;
-}
-
-.article-description {
+.email-text {
+    padding: 15px 20px;
+    font-family: Inter, sans-serif;
     font-size: 16px;
-    color: #666666;
-    line-height: 1.5;
-    margin-bottom: 15px;
+    line-height: 1.6;
+    color: #333;
 }
 
-.article-image {
+.email-heading {
+    padding: 15px 20px;
+    font-family: Inter, sans-serif;
+    font-weight: 700;
+    color: #333;
+    margin: 0;
+}
+
+.email-image {
+    display: block;
     width: 100%;
     height: auto;
-    border-radius: 8px;
-    margin-bottom: 15px;
+    margin: 0;
 }
 
-.cta-button {
-    display: inline-block;
-    background-color: #007bff;
-    color: #ffffff;
-    text-decoration: none;
-    padding: 12px 24px;
-    border-radius: 6px;
-    font-weight: 500;
-    font-size: 14px;
-}
-
-.social-links {
-    text-align: center;
+.email-button {
     padding: 20px;
-    background-color: #f8f9fa;
+    text-align: center;
 }
 
-.social-links a {
+.email-button a {
+    display: inline-block;
+    padding: 12px 24px;
+    background: var(--primary);
+    color: white;
+    text-decoration: none;
+    border-radius: 6px;
+    font-weight: 600;
+    transition: background 0.2s;
+}
+
+.email-divider {
+    padding: 10px 20px;
+}
+
+.email-divider hr {
+    border: none;
+    height: 1px;
+    background: #ddd;
+    margin: 0;
+}
+
+.email-spacer {
+    /* Height is controlled by inline styles */
+}
+
+.email-social {
+    padding: 20px;
+    text-align: center;
+}
+
+.email-social a {
     display: inline-block;
     margin: 0 10px;
     text-decoration: none;
 }
 
-.social-icon {
-    width: 32px;
-    height: 32px;
-    border-radius: 50%;
-}
-
 .email-footer {
-    background-color: #f8f9fa;
     padding: 20px;
     text-align: center;
     font-size: 12px;
-    color: #666666;
-}
-
-.unsubscribe-link {
-    color: #007bff;
-    text-decoration: none;
-}
-
-/* Responsive Email Styles */
-@media only screen and (max-width: 600px) {
-    .email-container {
-        width: 100% !important;
-    }
-    
-    .email-content {
-        padding: 15px !important;
-    }
-    
-    .article-title {
-        font-size: 18px !important;
-    }
-    
-    .article-description {
-        font-size: 14px !important;
-    }
+    color: #666;
+    background: #f8f9fa;
 }
