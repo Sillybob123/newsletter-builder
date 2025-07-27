@@ -41,99 +41,6 @@ const EmailTemplates = {
             }
         ]
     },
-
-    classic: {
-        name: 'Classic',
-        structure: [
-            {
-                type: 'header',
-                content: {
-                    title: 'The STEM Report',
-                    subtitle: 'Your Weekly Science & Technology Update',
-                    backgroundColor: '#28a745',
-                    textColor: '#ffffff'
-                }
-            },
-            {
-                type: 'text',
-                content: {
-                    text: 'Welcome to this week\'s edition of The STEM Report. We\'ve curated the most exciting developments in science and technology for you.',
-                    fontSize: '16px',
-                    color: '#333333'
-                }
-            },
-            {
-                type: 'article',
-                content: {
-                    title: 'Breaking: New Quantum Computing Breakthrough',
-                    description: 'Scientists achieve major milestone in quantum computing that could revolutionize data processing.',
-                    ctaText: 'Learn More',
-                    ctaUrl: '#'
-                }
-            },
-            {
-                type: 'article',
-                content: {
-                    title: 'Sustainable Energy Solutions for 2024',
-                    description: 'Discover the innovative approaches to renewable energy that are gaining traction worldwide.',
-                    ctaText: 'Explore',
-                    ctaUrl: '#'
-                }
-            },
-            {
-                type: 'footer',
-                content: {
-                    companyName: 'The STEM Report',
-                    address: '456 Innovation Ave, Future City, FC 67890',
-                    unsubscribeText: 'Update preferences or unsubscribe'
-                }
-            }
-        ]
-    },
-
-    minimal: {
-        name: 'Minimal',
-        structure: [
-            {
-                type: 'header',
-                content: {
-                    title: 'STEM Digest',
-                    subtitle: '',
-                    backgroundColor: '#ffffff',
-                    textColor: '#333333',
-                    borderBottom: '3px solid #6c757d'
-                }
-            },
-            {
-                type: 'article',
-                content: {
-                    title: 'Featured Article: The Future of Biotechnology',
-                    description: 'An in-depth look at how biotechnology is transforming medicine, agriculture, and environmental science.',
-                    ctaText: 'Read Article',
-                    ctaUrl: '#',
-                    layout: 'minimal'
-                }
-            },
-            {
-                type: 'text',
-                content: {
-                    text: 'Quick Links: Recent Publications | Research Database | Subscribe to Updates',
-                    fontSize: '14px',
-                    color: '#666666',
-                    textAlign: 'center'
-                }
-            },
-            {
-                type: 'footer',
-                content: {
-                    companyName: 'STEM Digest',
-                    address: '',
-                    unsubscribeText: 'Unsubscribe',
-                    minimal: true
-                }
-            }
-        ]
-    },
     catalyst_v1: {
         name: 'Catalyst V1',
         structure: [
@@ -267,48 +174,30 @@ const EmailTemplates = {
     }
 };
 
-// Template renderer functions
+// This object contains the HTML rendering functions for each block type.
 const TemplateRenderer = {
-    renderHeader(content) {
-        if (content.imageUrl) {
-            return `
-                <table width="100%" cellpadding="0" cellspacing="0" border="0">
-                    <tr>
-                        <td style="padding: 20px 0; text-align: center;">
-                            <a href="${content.link}" target="_blank">
-                                <img src="${content.imageUrl}" alt="Header Image" style="max-width: 660px; width: 100%; height: auto; display: block;">
-                            </a>
-                        </td>
-                    </tr>
-                </table>
-            `;
-        }
-        const style = `
-            background-color: ${content.backgroundColor || '#007bff'};
-            color: ${content.textColor || '#ffffff'};
-            padding: 30px 20px;
-            text-align: center;
-            ${content.borderBottom ? `border-bottom: ${content.borderBottom};` : ''}
-        `;
-
-        return `
-            <table width="100%" cellpadding="0" cellspacing="0" border="0" style="${style}">
-                <tr>
-                    <td>
-                        <h1 style="margin: 0; font-size: 28px; font-weight: 700; font-family: 'DM Sans', Arial, sans-serif;">
-                            ${content.title}
-                        </h1>
-                        ${content.subtitle ? `
-                            <p style="margin: 10px 0 0 0; font-size: 16px; opacity: 0.9; font-family: 'DM Sans', Arial, sans-serif;">
-                                ${content.subtitle}
-                            </p>
-                        ` : ''}
-                    </td>
-                </tr>
-            </table>
-        `;
+    renderHeading: (content) => `<h1 style="font-family: 'DM Sans', sans-serif; font-size: ${content.fontSize || '32px'}; color: ${content.color || '#222222'}; text-align: ${content.textAlign || 'left'};">${content.text}</h1>`,
+    renderText: (content) => `<p style="font-family: 'DM Sans', sans-serif; font-size: ${content.fontSize || '16px'}; color: ${content.color || '#555555'}; line-height: 1.6; text-align: ${content.textAlign || 'left'};">${content.text}</p>`,
+    renderBoxedText: (content) => `<table cellpadding="0" cellspacing="0" width="100%"><tr><td style="background-color: ${content.backgroundColor || '#f0f0f0'}; border: ${content.border || '1px solid #dddddd'}; border-radius: 8px; padding: 20px;"><p style="margin: 0; font-family: 'DM Sans', sans-serif; font-size: 16px; color: #333333;">${content.text}</p></td></tr></table>`,
+    renderImage: (content) => `<img src="${content.src}" alt="${content.alt}" style="width: 100%; max-width: ${content.width || '600px'}; height: auto; display: block; border-radius: ${content.borderRadius || '0'};">`,
+    renderImageGroup: (content) => {
+        const images = content.images.map(img => `<td width="50%" style="padding: 5px;"><img src="${img.src}" alt="${img.alt}" style="width: 100%; height: auto; display: block; border-radius: 8px;"></td>`).join('');
+        return `<table cellpadding="0" cellspacing="0" width="100%"><tr>${images}</tr></table>`;
     },
-
+    renderImageText: (content) => {
+        const img = `<td width="33%" style="padding-right: 20px;"><img src="${content.src}" alt="${content.alt}" style="width: 100%; height: auto; display: block; border-radius: 8px;"></td>`;
+        const text = `<td width="67%"><h3 style="font-family: 'DM Sans', sans-serif; margin-top: 0;">${content.title}</h3><p style="font-family: 'DM Sans', sans-serif; font-size: 15px; color: #555555;">${content.text}</p></td>`;
+        const parts = content.imagePosition === 'right' ? text + img : img + text;
+        return `<table cellpadding="0" cellspacing="0" width="100%"><tr>${parts}</tr></table>`;
+    },
+    renderButton: (content) => `<table cellpadding="0" cellspacing="0" width="100%"><tr><td align="${content.align || 'center'}"><a href="${content.href}" style="background-color: ${content.backgroundColor || '#007bff'}; color: ${content.color || '#ffffff'}; padding: 12px 25px; border-radius: 5px; text-decoration: none; font-family: 'DM Sans', sans-serif; font-weight: bold; display: inline-block;">${content.text}</a></td></tr></table>`,
+    renderDivider: (content) => `<hr style="border: none; border-top: ${content.width || '2px'} ${content.style || 'solid'} ${content.color || '#dddddd'}; margin: 20px 0;">`,
+    renderSpacer: (content) => `<div style="height: ${content.height || '20px'};"></div>`,
+    renderSocial: (content) => {
+        const links = content.links.map(link => `<a href="${link.url}" style="display: inline-block; margin: 0 10px;"><img src="https://cdn-icons-png.flaticon.com/32/733/${link.platform === 'twitter' ? '733579' : '733547'}.png" alt="${link.platform}" width="32"></a>`).join('');
+        return `<div style="text-align: center; padding: 10px 0;">${links}</div>`;
+    },
+    renderFooter: (content) => `<div style="text-align: center; padding: 20px; font-family: 'DM Sans', sans-serif; font-size: 12px; color: #888888;"><p>${content.text}</p><p><a href="${content.unsubscribeUrl}" style="color: #888888;">Unsubscribe</a></p></div>`,
     renderArticle(content) {
         const imagePart = `
             <td width="50%" style="vertical-align: top; padding: 0;">
@@ -338,56 +227,6 @@ const TemplateRenderer = {
             <table width="100%" cellpadding="0" cellspacing="0" border="0" style="padding: 20px;">
                 <tr>
                     ${content.imageLeft ? imagePart + textPart : textPart + imagePart}
-                </tr>
-            </table>
-        `;
-    },
-
-    renderText(content) {
-        const textAlign = content.textAlign || 'left';
-        const style = `
-            padding: 20px;
-            text-align: ${textAlign};
-            background-color: ${content.backgroundColor || 'transparent'};
-            border-radius: ${content.borderRadius || '0'};
-        `;
-
-        return `
-            <table width="100%" cellpadding="0" cellspacing="0" border="0" style="${style}">
-                <tr>
-                    <td style="padding: ${content.padding || '0'}">
-                        <p style="margin: 0; font-size: ${content.fontSize || '16px'}; color: ${content.textColor || '#333333'}; line-height: 1.6; font-family: 'DM Sans', Arial, sans-serif;">
-                            ${content.text}
-                        </p>
-                    </td>
-                </tr>
-            </table>
-        `;
-    },
-
-    renderSocial(content) {
-        const socialIcons = {
-            linkedin: 'https://cdn-icons-png.flaticon.com/32/174/174857.png',
-            twitter: 'https://cdn-icons-png.flaticon.com/32/733/733579.png',
-            instagram: 'https://cdn-icons-png.flaticon.com/32/174/174855.png',
-            facebook: 'https://cdn-icons-png.flaticon.com/32/733/733547.png'
-        };
-
-        const linksHtml = content.links.map(link => `
-            <a href="${link.url}" style="display: inline-block; margin: 0 10px; text-decoration: none;">
-                <img src="${socialIcons[link.platform]}" alt="${link.platform}" style="width: 32px; height: 32px; border-radius: 50%;">
-            </a>
-        `).join('');
-
-        return `
-            <table width="100%" cellpadding="0" cellspacing="0" border="0" style="background-color: #f8f9fa; padding: 30px 20px; text-align: center;">
-                <tr>
-                    <td>
-                        <p style="margin: 0 0 15px 0; font-size: 16px; color: #333333; font-family: 'DM Sans', Arial, sans-serif;">
-                            Follow us for more updates:
-                        </p>
-                        ${linksHtml}
-                    </td>
                 </tr>
             </table>
         `;
@@ -422,76 +261,4 @@ const TemplateRenderer = {
             </table>
         `;
     },
-    renderFooter(content) {
-        if (content.companyUrl) { // Catalyst footer
-            const socialLinks = (content.socialLinks || []).map(link => `
-                <td style="padding: 0 8px;">
-                    <a href="${link.url}" target="_blank">
-                        <img src="http://googleusercontent.com/profile/picture/${link.platform === 'linkedin' ? '8' : '1'}" alt="${link.platform}" width="24" height="24" style="border: 0; border-radius: 3px; display: block;">
-                    </a>
-                </td>
-            `).join('');
-
-            return `
-                <table width="100%" cellpadding="0" cellspacing="0" border="0" style="padding: 20px;">
-                    <tr>
-                        <td width="50%" style="text-align: left;">
-                             <a href="${content.companyUrl}" style="font-family:'DM Sans',sans-serif;font-size:16px;font-weight:bold;color:#2b2b2b;text-decoration:none" target="_blank">${content.companyName}</a>
-                        </td>
-                        <td width="50%" style="text-align: right;">
-                             <table border="0" cellpadding="0" cellspacing="0" role="presentation" style="display: inline-block;">
-                                <tr>
-                                    ${socialLinks}
-                                </tr>
-                             </table>
-                        </td>
-                    </tr>
-                     ${content.unsubscribeUrl ? `
-                        <tr>
-                            <td colspan="2" style="text-align: center; padding-top: 20px; font-size: 12px; color: #666666; font-family: 'DM Sans', Arial, sans-serif;">
-                                <a href="${content.unsubscribeUrl}" style="color: #007bff; text-decoration: none;">Unsubscribe</a>
-                            </td>
-                        </tr>
-                    ` : ''}
-                </table>
-            `;
-        }
-        
-        // Original footers
-        if (content.minimal) {
-            return ` <table width="100%" cellpadding="0" cellspacing="0" border="0" style="background-color: #f8f9fa; padding: 20px; text-align: center;">
-                    <tr>
-                        <td>
-                            <p style="margin: 0; font-size: 12px; color: #666666; font-family: 'DM Sans', Arial, sans-serif;">
-                                © ${new Date().getFullYear()} ${content.companyName}
-                                ${content.unsubscribeText ? ` | <a href="#" style="color: #007bff; text-decoration: none;">${content.unsubscribeText}</a>` : ''}
-                            </p>
-                        </td>
-                    </tr>
-                </table>
-            `;
-        }
-
-        return `
-            <table width="100%" cellpadding="0" cellspacing="0" border="0" style="background-color: #f8f9fa; padding: 30px 20px; text-align: center;">
-                <tr>
-                    <td>
-                        <p style="margin: 0 0 10px 0; font-size: 14px; color: #333333; font-weight: 600; font-family: 'DM Sans', Arial, sans-serif;">
-                            ${content.companyName}
-                        </p>
-                        ${content.address ? `
-                            <p style="margin: 0 0 15px 0; font-size: 12px; color: #666666; font-family: 'DM Sans', Arial, sans-serif;">
-                                ${content.address}
-                            </p>
-                        ` : ''}
-                        <p style="margin: 0; font-size: 12px; color: #666666; font-family: 'DM Sans', Arial, sans-serif;">
-                            © ${new Date().getFullYear()} ${content.companyName}. All rights reserved.
-                            <br>
-                            <a href="#" style="color: #007bff; text-decoration: none;">${content.unsubscribeText}</a>
-                        </p>
-                    </td>
-                </tr>
-            </table>
-        `;
-    }
 };
