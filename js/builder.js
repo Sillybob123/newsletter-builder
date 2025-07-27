@@ -81,7 +81,7 @@ class NewsletterBuilder {
         });
 
         document.querySelectorAll('.tab-btn').forEach(btn => {
-            btn.addEventListener('click', (e) => {
+            btn .addEventListener('click', (e) => {
                 this.switchPreviewTab(e.currentTarget.dataset.tab);
             });
         });
@@ -128,10 +128,85 @@ class NewsletterBuilder {
             header: {
                 type: 'header',
                 content: {
-                    title: 'Newsletter Title',
-                    subtitle: 'Your subtitle here',
-                    backgroundColor: this.currentNewsletter.settings.brandColor,
-                    textColor: '#ffffff'
+                    logoUrl: 'https://mcusercontent.com/d76819924b4f0773791d6827b/images/66b9f1d7-4f68-f6ac-a802-885c31858105.jpg',
+                    websiteUrl: 'https://www.catalyst-magazine.com/',
+                    websiteText: 'catalyst-magazine.com',
+                    backgroundColor: '#ffffff',
+                    textColor: '#2b2b2b'
+                }
+            },
+            brandHeader: {
+                type: 'brandHeader',
+                content: {
+                    logoUrl: 'https://mcusercontent.com/d76819924b4f0773791d6827b/images/66b9f1d7-4f68-f6ac-a802-885c31858105.jpg',
+                    websiteUrl: 'https://www.catalyst-magazine.com/',
+                    websiteText: 'catalyst-magazine.com',
+                    backgroundColor: '#ffffff',
+                    padding: '20px'
+                }
+            },
+            simpleHeader: {
+                type: 'simpleHeader',
+                content: {
+                    logoUrl: 'https://mcusercontent.com/d76819924b4f0773791d6827b/images/66b9f1d7-4f68-f6ac-a802-885c31858105.jpg',
+                    websiteUrl: 'https://www.catalyst-magazine.com/',
+                    maxWidth: '660px',
+                    backgroundColor: '#ffffff'
+                }
+            },
+            featuredArticle: {
+                type: 'featuredArticle',
+                content: {
+                    title: 'Featured Article Title',
+                    description: 'This is a featured article with prominent placement and styling.',
+                    imageUrl: 'https://via.placeholder.com/560x300/007bff/ffffff?text=Featured+Article',
+                    ctaText: 'Read Full Article',
+                    ctaUrl: '#',
+                    layout: 'imageTop'
+                }
+            },
+            twoColumnArticle: {
+                type: 'twoColumnArticle',
+                content: {
+                    leftColumn: {
+                        title: 'Article Title',
+                        description: 'Article description goes here with engaging content.',
+                        ctaText: 'Read More',
+                        ctaUrl: '#'
+                    },
+                    rightColumn: {
+                        imageUrl: 'https://via.placeholder.com/280x200/007bff/ffffff?text=Article+Image',
+                        altText: 'Article image'
+                    }
+                }
+            },
+            articleGrid: {
+                type: 'articleGrid',
+                content: {
+                    articles: [
+                        {
+                            title: 'Article One',
+                            description: 'Brief description of the first article.',
+                            imageUrl: 'https://via.placeholder.com/280x180/28a745/ffffff?text=Article+1',
+                            ctaUrl: '#'
+                        },
+                        {
+                            title: 'Article Two',
+                            description: 'Brief description of the second article.',
+                            imageUrl: 'https://via.placeholder.com/280x180/dc3545/ffffff?text=Article+2',
+                            ctaUrl: '#'
+                        }
+                    ]
+                }
+            },
+            cleanArticle: {
+                type: 'cleanArticle',
+                content: {
+                    title: 'Clean Article Title',
+                    description: 'Clean, minimal article layout perfect for focused content.',
+                    ctaText: 'Learn More',
+                    ctaUrl: '#',
+                    padding: '30px 24px'
                 }
             },
             article: {
@@ -160,6 +235,10 @@ class NewsletterBuilder {
                     altText: 'Image description'
                 }
             },
+            dottedDivider: {
+                type: 'dottedDivider',
+                content: {}
+            },
             social: {
                 type: 'social',
                 content: {
@@ -174,9 +253,30 @@ class NewsletterBuilder {
                 type: 'footer',
                 content: {
                     companyName: 'Your Company Name',
-                    address: '123 Your Street, Your City, YC 12345',
-                    unsubscribeText: 'Unsubscribe from this newsletter',
-                    unsubscribeUrl: '#'
+                    websiteUrl: 'https://www.catalyst-magazine.com/',
+                    unsubscribeUrl: 'https://www.catalyst-magazine.com/unsubscribe',
+                    backgroundColor: '#ebebeb',
+                    textColor: '#666666'
+                }
+            },
+            roundedFooter: {
+                type: 'roundedFooter',
+                content: {
+                    companyName: 'Your Company Name',
+                    unsubscribeText: 'Unsubscribe',
+                    unsubscribeUrl: '#',
+                    backgroundColor: '#ffffff',
+                    borderRadius: '40px'
+                }
+            },
+            minimalFooter: {
+                type: 'minimalFooter',
+                content: {
+                    text: 'Unsubscribe',
+                    url: '#',
+                    fontSize: '10px',
+                    textAlign: 'center',
+                    backgroundColor: '#ffffff'
                 }
             }
         };
@@ -308,12 +408,16 @@ class NewsletterBuilder {
             case 'header':
                 return `
                     <div class="property-group">
-                        <label>Title:</label>
-                        <input type="text" id="prop-title" value="${content.title}">
+                        <label>Logo URL:</label>
+                        <input type="url" id="prop-logo-url" value="${content.logoUrl}">
                     </div>
                     <div class="property-group">
-                        <label>Subtitle:</label>
-                        <input type="text" id="prop-subtitle" value="${content.subtitle || ''}">
+                        <label>Website URL:</label>
+                        <input type="url" id="prop-website-url" value="${content.websiteUrl}">
+                    </div>
+                    <div class="property-group">
+                        <label>Website Text:</label>
+                        <input type="text" id="prop-website-text" value="${content.websiteText}">
                     </div>
                     <div class="property-group">
                         <label>Background Color:</label>
@@ -322,6 +426,140 @@ class NewsletterBuilder {
                     <div class="property-group">
                         <label>Text Color:</label>
                         <input type="color" id="prop-text-color" value="${content.textColor}">
+                    </div>
+                `;
+
+            case 'brandHeader':
+                return `
+                    <div class="property-group">
+                        <label>Logo URL:</label>
+                        <input type="url" id="prop-logo-url" value="${content.logoUrl}">
+                    </div>
+                    <div class="property-group">
+                        <label>Website URL:</label>
+                        <input type="url" id="prop-website-url" value="${content.websiteUrl}">
+                    </div>
+                    <div class="property-group">
+                        <label>Website Text:</label>
+                        <input type="text" id="prop-website-text" value="${content.websiteText}">
+                    </div>
+                    <div class="property-group">
+                        <label>Background Color:</label>
+                        <input type="color" id="prop-bg-color" value="${content.backgroundColor}">
+                    </div>
+                `;
+
+            case 'simpleHeader':
+                return `
+                    <div class="property-group">
+                        <label>Logo URL:</label>
+                        <input type="url" id="prop-logo-url" value="${content.logoUrl}">
+                    </div>
+                    <div class="property-group">
+                        <label>Website URL:</label>
+                        <input type="url" id="prop-website-url" value="${content.websiteUrl}">
+                    </div>
+                    <div class="property-group">
+                        <label>Max Width:</label>
+                        <input type="text" id="prop-max-width" value="${content.maxWidth}">
+                    </div>
+                    <div class="property-group">
+                        <label>Background Color:</label>
+                        <input type="color" id="prop-bg-color" value="${content.backgroundColor}">
+                    </div>
+                `;
+
+            case 'featuredArticle':
+                return `
+                    <div class="property-group">
+                        <label>Title:</label>
+                        <input type="text" id="prop-title" value="${content.title}">
+                    </div>
+                    <div class="property-group">
+                        <label>Description:</label>
+                        <textarea id="prop-description" rows="4">${content.description}</textarea>
+                    </div>
+                    <div class="property-group">
+                        <label>Image URL:</label>
+                        <input type="url" id="prop-image-url" value="${content.imageUrl || ''}">
+                    </div>
+                    <div class="property-group">
+                        <label>Button Text:</label>
+                        <input type="text" id="prop-cta-text" value="${content.ctaText || ''}">
+                    </div>
+                    <div class="property-group">
+                        <label>Button URL:</label>
+                        <input type="url" id="prop-cta-url" value="${content.ctaUrl || ''}">
+                    </div>
+                `;
+
+            case 'twoColumnArticle':
+                return `
+                    <div class="property-group">
+                        <h4>Left Column</h4>
+                        <label>Title:</label>
+                        <input type="text" id="prop-left-title" value="${content.leftColumn.title}">
+                        <label>Description:</label>
+                        <textarea id="prop-left-description" rows="3">${content.leftColumn.description}</textarea>
+                        <label>Button Text:</label>
+                        <input type="text" id="prop-left-cta-text" value="${content.leftColumn.ctaText || ''}">
+                        <label>Button URL:</label>
+                        <input type="url" id="prop-left-cta-url" value="${content.leftColumn.ctaUrl || ''}">
+                    </div>
+                    <div class="property-group">
+                        <h4>Right Column</h4>
+                        <label>Image URL:</label>
+                        <input type="url" id="prop-right-image-url" value="${content.rightColumn.imageUrl}">
+                        <label>Alt Text:</label>
+                        <input type="text" id="prop-right-alt-text" value="${content.rightColumn.altText || ''}">
+                    </div>
+                `;
+
+            case 'articleGrid':
+                return `
+                    <div class="property-group">
+                        <label>Articles:</label>
+                        ${content.articles.map((article, i) => `
+                            <div class="article-item" style="border: 1px solid #e9ecef; padding: 15px; margin: 10px 0; border-radius: 6px;">
+                                <h5>Article ${i + 1}</h5>
+                                <label>Title:</label>
+                                <input type="text" id="prop-article-title-${i}" value="${article.title}">
+                                <label>Description:</label>
+                                <textarea id="prop-article-description-${i}" rows="2">${article.description}</textarea>
+                                <label>Image URL:</label>
+                                <input type="url" id="prop-article-image-${i}" value="${article.imageUrl}">
+                                <label>URL:</label>
+                                <input type="url" id="prop-article-url-${i}" value="${article.ctaUrl}">
+                                <button type="button" class="btn btn-sm btn-danger" onclick="newsletterBuilder.removeArticle(${index}, ${i})" style="margin-top: 10px; padding: 5px 10px; background: #dc3545; color: white; border: none; border-radius: 4px; cursor: pointer;">Remove</button>
+                            </div>
+                        `).join('')}
+                        <button type="button" class="btn btn-secondary" onclick="newsletterBuilder.addArticle(${index})" style="margin-top: 10px; padding: 8px 16px; background: #6c757d; color: white; border: none; border-radius: 4px; cursor: pointer;">
+                            <i class="fas fa-plus"></i> Add Article
+                        </button>
+                    </div>
+                `;
+
+            case 'cleanArticle':
+                return `
+                    <div class="property-group">
+                        <label>Title:</label>
+                        <input type="text" id="prop-title" value="${content.title}">
+                    </div>
+                    <div class="property-group">
+                        <label>Description:</label>
+                        <textarea id="prop-description" rows="4">${content.description}</textarea>
+                    </div>
+                    <div class="property-group">
+                        <label>Button Text:</label>
+                        <input type="text" id="prop-cta-text" value="${content.ctaText || ''}">
+                    </div>
+                    <div class="property-group">
+                        <label>Button URL:</label>
+                        <input type="url" id="prop-cta-url" value="${content.ctaUrl || ''}">
+                    </div>
+                    <div class="property-group">
+                        <label>Padding:</label>
+                        <input type="text" id="prop-padding" value="${content.padding || '30px 24px'}">
                     </div>
                 `;
 
@@ -396,20 +634,20 @@ class NewsletterBuilder {
                     <div class="property-group">
                         <label>Social Links:</label>
                         ${content.links.map((link, i) => `
-                            <div class="social-link-item">
+                            <div class="social-link-item" style="border: 1px solid #e9ecef; padding: 10px; margin: 10px 0; border-radius: 4px;">
                                 <select id="prop-social-platform-${i}">
                                     <option value="linkedin" ${link.platform === 'linkedin' ? 'selected' : ''}>LinkedIn</option>
                                     <option value="twitter" ${link.platform === 'twitter' ? 'selected' : ''}>Twitter</option>
                                     <option value="instagram" ${link.platform === 'instagram' ? 'selected' : ''}>Instagram</option>
                                     <option value="facebook" ${link.platform === 'facebook' ? 'selected' : ''}>Facebook</option>
                                 </select>
-                                <input type="url" id="prop-social-url-${i}" value="${link.url}" placeholder="URL">
-                                <button type="button" class="remove-social-btn" onclick="newsletterBuilder.removeSocialLink(${index}, ${i})">
+                                <input type="url" id="prop-social-url-${i}" value="${link.url}" placeholder="URL" style="width: 100%; margin: 5px 0;">
+                                <button type="button" class="remove-social-btn" onclick="newsletterBuilder.removeSocialLink(${index}, ${i})" style="padding: 5px 10px; background: #dc3545; color: white; border: none; border-radius: 4px; cursor: pointer;">
                                     <i class="fas fa-times"></i>
                                 </button>
                             </div>
                         `).join('')}
-                        <button type="button" class="btn btn-secondary" onclick="newsletterBuilder.addSocialLink(${index})">
+                        <button type="button" class="btn btn-secondary" onclick="newsletterBuilder.addSocialLink(${index})" style="margin-top: 10px; padding: 8px 16px; background: #6c757d; color: white; border: none; border-radius: 4px; cursor: pointer;">
                             <i class="fas fa-plus"></i> Add Link
                         </button>
                     </div>
@@ -422,8 +660,28 @@ class NewsletterBuilder {
                         <input type="text" id="prop-company-name" value="${content.companyName}">
                     </div>
                     <div class="property-group">
-                        <label>Address:</label>
-                        <textarea id="prop-address" rows="3">${content.address || ''}</textarea>
+                        <label>Website URL:</label>
+                        <input type="url" id="prop-website-url" value="${content.websiteUrl || ''}">
+                    </div>
+                    <div class="property-group">
+                        <label>Unsubscribe URL:</label>
+                        <input type="url" id="prop-unsubscribe-url" value="${content.unsubscribeUrl || ''}">
+                    </div>
+                    <div class="property-group">
+                        <label>Background Color:</label>
+                        <input type="color" id="prop-bg-color" value="${content.backgroundColor || '#ebebeb'}">
+                    </div>
+                    <div class="property-group">
+                        <label>Text Color:</label>
+                        <input type="color" id="prop-text-color" value="${content.textColor || '#666666'}">
+                    </div>
+                `;
+
+            case 'roundedFooter':
+                return `
+                    <div class="property-group">
+                        <label>Company Name:</label>
+                        <input type="text" id="prop-company-name" value="${content.companyName}">
                     </div>
                     <div class="property-group">
                         <label>Unsubscribe Text:</label>
@@ -431,7 +689,55 @@ class NewsletterBuilder {
                     </div>
                     <div class="property-group">
                         <label>Unsubscribe URL:</label>
-                        <input type="url" id="prop-unsubscribe-url" value="${content.unsubscribeUrl || ''}">
+                        <input type="url" id="prop-unsubscribe-url" value="${content.unsubscribeUrl}">
+                    </div>
+                    <div class="property-group">
+                        <label>Background Color:</label>
+                        <input type="color" id="prop-bg-color" value="${content.backgroundColor}">
+                    </div>
+                    <div class="property-group">
+                        <label>Border Radius:</label>
+                        <input type="text" id="prop-border-radius" value="${content.borderRadius}">
+                    </div>
+                `;
+
+            case 'minimalFooter':
+                return `
+                    <div class="property-group">
+                        <label>Text:</label>
+                        <input type="text" id="prop-text" value="${content.text}">
+                    </div>
+                    <div class="property-group">
+                        <label>URL:</label>
+                        <input type="url" id="prop-url" value="${content.url}">
+                    </div>
+                    <div class="property-group">
+                        <label>Font Size:</label>
+                        <select id="prop-font-size">
+                            <option value="8px" ${content.fontSize === '8px' ? 'selected' : ''}>8px</option>
+                            <option value="10px" ${content.fontSize === '10px' ? 'selected' : ''}>10px</option>
+                            <option value="12px" ${content.fontSize === '12px' ? 'selected' : ''}>12px</option>
+                            <option value="14px" ${content.fontSize === '14px' ? 'selected' : ''}>14px</option>
+                        </select>
+                    </div>
+                    <div class="property-group">
+                        <label>Text Alignment:</label>
+                        <select id="prop-text-align">
+                            <option value="left" ${content.textAlign === 'left' ? 'selected' : ''}>Left</option>
+                            <option value="center" ${content.textAlign === 'center' ? 'selected' : ''}>Center</option>
+                            <option value="right" ${content.textAlign === 'right' ? 'selected' : ''}>Right</option>
+                        </select>
+                    </div>
+                    <div class="property-group">
+                        <label>Background Color:</label>
+                        <input type="color" id="prop-bg-color" value="${content.backgroundColor}">
+                    </div>
+                `;
+
+            case 'dottedDivider':
+                return `
+                    <div class="property-group">
+                        <p>This is a dotted divider line. No customization options available.</p>
                     </div>
                 `;
 
@@ -459,7 +765,7 @@ class NewsletterBuilder {
         const propId = input.id;
         const value = input.value;
 
-        // Map property IDs to content properties
+        // Enhanced property mapping
         const propertyMap = {
             'prop-title': 'title',
             'prop-subtitle': 'subtitle',
@@ -476,11 +782,59 @@ class NewsletterBuilder {
             'prop-company-name': 'companyName',
             'prop-address': 'address',
             'prop-unsubscribe-text': 'unsubscribeText',
-            'prop-unsubscribe-url': 'unsubscribeUrl'
+            'prop-unsubscribe-url': 'unsubscribeUrl',
+            'prop-logo-url': 'logoUrl',
+            'prop-website-url': 'websiteUrl',
+            'prop-website-text': 'websiteText',
+            'prop-border-radius': 'borderRadius',
+            'prop-url': 'url',
+            'prop-max-width': 'maxWidth',
+            'prop-padding': 'padding'
         };
 
+        // Handle two-column article properties
+        if (propId.startsWith('prop-left-')) {
+            const property = propId.replace('prop-left-', '').replace('-', '');
+            const propertyMapping = {
+                'title': 'title',
+                'description': 'description',
+                'ctatext': 'ctaText',
+                'ctaurl': 'ctaUrl'
+            };
+            
+            if (propertyMapping[property]) {
+                block.content.leftColumn[propertyMapping[property]] = value;
+            }
+        } else if (propId.startsWith('prop-right-')) {
+            const property = propId.replace('prop-right-', '').replace('-', '');
+            const propertyMapping = {
+                'imageurl': 'imageUrl',
+                'alttext': 'altText'
+            };
+            
+            if (propertyMapping[property]) {
+                block.content.rightColumn[propertyMapping[property]] = value;
+            }
+        }
+        // Handle article grid properties
+        else if (propId.startsWith('prop-article-')) {
+            const parts = propId.split('-');
+            const property = parts[2];
+            const articleIndex = parseInt(parts[3]);
+            
+            const propertyMapping = {
+                'title': 'title',
+                'description': 'description',
+                'image': 'imageUrl',
+                'url': 'ctaUrl'
+            };
+            
+            if (propertyMapping[property] && block.content.articles[articleIndex]) {
+                block.content.articles[articleIndex][propertyMapping[property]] = value;
+            }
+        }
         // Handle social links separately
-        if (propId.startsWith('prop-social-')) {
+        else if (propId.startsWith('prop-social-')) {
             const parts = propId.split('-');
             const linkIndex = parseInt(parts[3]);
             
@@ -489,7 +843,9 @@ class NewsletterBuilder {
             } else if (parts[2] === 'url') {
                 block.content.links[linkIndex].url = value;
             }
-        } else if (propertyMap[propId]) {
+        }
+        // Handle standard properties
+        else if (propertyMap[propId]) {
             block.content[propertyMap[propId]] = value;
         }
 
@@ -500,6 +856,32 @@ class NewsletterBuilder {
 
         this.updatePreview();
         this.saveToHistory();
+    }
+
+    addArticle(blockIndex) {
+        const block = this.currentNewsletter.content[blockIndex];
+        block.content.articles.push({
+            title: 'New Article',
+            description: 'Article description here.',
+            imageUrl: 'https://via.placeholder.com/280x180/007bff/ffffff?text=New+Article',
+            ctaUrl: '#'
+        });
+        
+        this.showBlockProperties(blockIndex);
+        this.updatePreview();
+        this.saveToHistory();
+    }
+
+    removeArticle(blockIndex, articleIndex) {
+        const block = this.currentNewsletter.content[blockIndex];
+        if (block.content.articles.length > 1) {
+            block.content.articles.splice(articleIndex, 1);
+            this.showBlockProperties(blockIndex);
+            this.updatePreview();
+            this.saveToHistory();
+        } else {
+            alert('You must have at least one article.');
+        }
     }
 
     addSocialLink(blockIndex) {
@@ -773,6 +1155,46 @@ const notificationStyles = `
     
     .notification-info i {
         color: #007bff;
+    }
+
+    .property-group {
+        margin-bottom: 1rem;
+    }
+
+    .property-group label {
+        display: block;
+        font-size: 0.875rem;
+        font-weight: 500;
+        color: #495057;
+        margin-bottom: 0.25rem;
+    }
+
+    .property-group input,
+    .property-group textarea,
+    .property-group select {
+        width: 100%;
+        padding: 0.5rem;
+        border: 1px solid #ced4da;
+        border-radius: 4px;
+        font-family: inherit;
+        font-size: 0.875rem;
+        margin-bottom: 0.5rem;
+    }
+
+    .property-group input:focus,
+    .property-group textarea:focus,
+    .property-group select:focus {
+        outline: none;
+        border-color: #007bff;
+        box-shadow: 0 0 0 2px rgba(0,123,255,0.25);
+    }
+
+    .property-group h4 {
+        color: #495057;
+        font-size: 1rem;
+        margin-bottom: 0.5rem;
+        padding-bottom: 0.25rem;
+        border-bottom: 1px solid #e9ecef;
     }
 `;
 
