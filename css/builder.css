@@ -481,3 +481,14 @@ body {
 .control-btn.delete:hover {
     background: #c82333;
 }
+
+.newsletter-canvas.drag-over {
+    border: 2px dashed #007bff;
+}
+
+.drop-indicator {
+    height: 4px;
+    background-color: #007bff;
+    margin: 2px 0;
+    border-radius: 2px;
+}
