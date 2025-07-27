@@ -433,6 +433,96 @@ const TemplateRenderer = {
         `;
     },
 
+    renderArticle(content) {
+        const containerStyle = `
+            padding: 30px 20px;
+            border-bottom: 1px solid #e9ecef;
+        `;
+
+        return `
+            <table width="100%" cellpadding="0" cellspacing="0" border="0" style="${containerStyle}">
+                <tr>
+                    <td>
+                        ${content.imageUrl ? `
+                            <img src="${content.imageUrl}" alt="Article Image" style="width: 100%; height: auto; border-radius: 8px; margin-bottom: 20px; display: block;">
+                        ` : ''}
+                        <h2 style="margin: 0 0 15px 0; font-size: 22px; font-weight: bold; color: #000000; line-height: 1.3; font-family: 'DM Sans', Arial, sans-serif;">
+                            ${content.title}
+                        </h2>
+                        <p style="margin: 0 0 20px 0; font-size: 16px; color: #666666; line-height: 1.6; font-family: 'DM Sans', Arial, sans-serif;">
+                            ${content.description}
+                        </p>
+                        ${content.ctaText && content.ctaUrl ? `
+                            <a href="${content.ctaUrl}" style="display: inline-block; background-color: #007bff; color: #ffffff; text-decoration: none; padding: 12px 24px; border-radius: 6px; font-weight: 500; font-size: 14px; font-family: 'DM Sans', Arial, sans-serif;">
+                                ${content.ctaText}
+                            </a>
+                        ` : ''}
+                    </td>
+                </tr>
+            </table>
+        `;
+    },
+
+    renderText(content) {
+        const textAlign = content.textAlign || 'left';
+        const style = `
+            padding: 20px;
+            text-align: ${textAlign};
+        `;
+
+        return `
+            <table width="100%" cellpadding="0" cellspacing="0" border="0" style="${style}">
+                <tr>
+                    <td>
+                        <p style="margin: 0; font-size: ${content.fontSize || '16px'}; color: ${content.color || '#333333'}; line-height: 1.6; font-family: 'DM Sans', Arial, sans-serif;">
+                            ${content.text}
+                        </p>
+                    </td>
+                </tr>
+            </table>
+        `;
+    },
+
+    renderImage(content) {
+        return `
+            <table width="100%" cellpadding="0" cellspacing="0" border="0">
+                <tr>
+                    <td style="padding: 20px;">
+                        <img src="${content.imageUrl}" alt="${content.altText || 'Image'}" style="width: 100%; height: auto; border-radius: 8px; display: block;">
+                    </td>
+                </tr>
+            </table>
+        `;
+    },
+
+    renderSocial(content) {
+        const socialIcons = {
+            linkedin: 'https://cdn-icons-png.flaticon.com/32/174/174857.png',
+            twitter: 'https://cdn-icons-png.flaticon.com/32/733/733579.png',
+            instagram: 'https://cdn-icons-png.flaticon.com/32/174/174855.png',
+            facebook: 'https://cdn-icons-png.flaticon.com/32/733/733547.png'
+        };
+
+        const linksHtml = content.links.map(link => `
+            <a href="${link.url}" style="display: inline-block; margin: 0 10px; text-decoration: none;">
+                <img src="${socialIcons[link.platform]}" alt="${link.platform}" style="width: 32px; height: 32px; border-radius: 50%;">
+            </a>
+        `).join('');
+
+        return `
+            <table width="100%" cellpadding="0" cellspacing="0" border="0" style="background-color: #f8f9fa; padding: 30px 20px; text-align: center;">
+                <tr>
+                    <td>
+                        <p style="margin: 0 0 15px 0; font-size: 16px; color: #333333; font-family: 'DM Sans', Arial, sans-serif;">
+                            Follow us for more updates:
+                        </p>
+                        ${linksHtml}
+                    </td>
+                </tr>
+            </table>
+        `;
+    },
+
     renderFooter(content) {
         return `
             <table width="100%" cellpadding="0" cellspacing="0" border="0" style="background-color: ${content.backgroundColor || '#ebebeb'}; padding: 40px 30px; text-align: center;">
