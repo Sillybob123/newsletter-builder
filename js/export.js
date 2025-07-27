@@ -1,58 +1,102 @@
 class NewsletterExporter {
     generateEmailHTML(newsletterData, options = {}) {
-        const { title, content } = newsletterData;
+        const { title, blocks, globalStyles } = newsletterData;
         
-        const bodyContent = content.map(block => {
-            const renderer = TemplateRenderer[`render${block.type.charAt(0).toUpperCase() + block.type.slice(1)}`];
-            return renderer ? renderer(block.content) : '';
-        }).join('');
+        const bodyContent = blocks.map(block => this.generateBlockHTML(block, globalStyles)).join('');
 
         const emailHTML = `
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>${title || 'Newsletter'}</title>
-    <style>
-        body { margin: 0; padding: 0; background-color: #f4f4f4; }
-        table { border-collapse: collapse; mso-table-lspace: 0pt; mso-table-rspace: 0pt; }
-        .wrapper { background-color: #f4f4f4; width: 100%; }
-        .container { background-color: #ffffff; width: 600px; margin: 0 auto; }
-        @media screen and (max-width: 600px) {
-            .container { width: 100% !important; }
-        }
-    </style>
-</head>
-<body>
-    <table class="wrapper" cellpadding="0" cellspacing="0" width="100%">
-        <tr>
-            <td>
-                <table class="container" cellpadding="0" cellspacing="0" width="600" align="center">
-                    <tr>
-                        <td style="padding: 20px;">
+        <!DOCTYPE html>
+        <html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:o="urn:schemas-microsoft-com:office:office">
+        <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width,initial-scale=1">
+            <meta name="x-apple-disable-message-reformatting">
+            <title>${title || 'Newsletter'}</title>
+            <style>
+                table, td, div, h1, p {font-family: ${globalStyles.fontFamily};}
+                table, td {border-collapse: collapse;}
+                img {border:0;height:auto;line-height:100%;outline:none;text-decoration:none;}
+            </style>
+        </head>
+        <body style="margin:0;padding:0;">
+            <table role="presentation" style="width:100%;border-collapse:collapse;border:0;border-spacing:0;background:#f0f2f5;">
+                <tr>
+                    <td align="center" style="padding:0;">
+                        <table role="presentation" class="email-container" style="width:600px;border-collapse:collapse;border:1px solid #cccccc;border-spacing:0;text-align:left; background:${globalStyles.backgroundColor};">
                             ${bodyContent}
+                        </table>
+                    </td>
+                </tr>
+            </table>
+        </body>
+        </html>`;
+
+        return emailHTML;
+    }
+    
+    generateBlockHTML(block, globalStyles) {
+        const getPadding = (p) => `${p.top} ${p.right} ${p.bottom} ${p.left}`;
+        switch (block.type) {
+            case 'text':
+                return `
+                    <tr>
+                        <td style="padding:${getPadding(block.content.padding)};">
+                            <p style="margin:0;font-size:${block.content.fontSize};line-height:1.6;color:${block.content.color};text-align:${block.content.textAlign};font-weight:${block.content.fontWeight};">${block.content.text}</p>
                         </td>
                     </tr>
-                </table>
-            </td>
-        </tr>
-    </table>
-</body>
-</html>`;
-
-        if (options.raw) {
-            return { html: emailHTML };
+                `;
+            case 'heading':
+                return `
+                     <tr>
+                        <td style="padding:${getPadding(block.content.padding)};">
+                            <h2 style="margin:0;font-size:${block.content.fontSize};line-height:1.3;color:${block.content.color};text-align:${block.content.textAlign};font-weight:${block.content.fontWeight};">${block.content.text}</h2>
+                        </td>
+                    </tr>
+                `;
+            case 'image':
+                return `
+                    <tr>
+                        <td style="padding:${getPadding(block.content.padding)};" align="${block.content.textAlign || 'center'}">
+                            <img src="${block.content.src}" alt="${block.content.alt}" width="${parseInt(block.content.width)}%" style="display:block;height:auto;max-width:100%;border-radius:${block.content.borderRadius};" />
+                        </td>
+                    </tr>
+                `;
+             case 'button':
+                return `
+                    <tr>
+                        <td align="${block.content.textAlign}" style="padding: 20px;">
+                            <table role="presentation" style="border-collapse:collapse;border-spacing:0;">
+                                <tr>
+                                    <td align="center" style="background:${block.content.backgroundColor};border-radius:${block.content.borderRadius};">
+                                        <a href="${block.content.href}" style="font-size:${block.content.fontSize};font-weight:${block.content.fontWeight};color:${block.content.color};text-decoration:none;padding:${getPadding(block.content.padding)};display:inline-block;border-radius:${block.content.borderRadius};">${block.content.text}</a>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                `;
+            case 'divider':
+                return `
+                    <tr>
+                        <td style="padding:${getPadding(block.content.padding)};">
+                            <table role="presentation" style="width:100%;border-collapse:collapse;border:0;border-spacing:0;">
+                                <tr>
+                                    <td style="padding:0;border-top:${block.content.height} solid ${block.content.color};"></td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                `;
+            case 'spacer':
+                 return `<tr><td style="font-size:0;line-height:0;height:${block.content.height};">&nbsp;</td></tr>`;
+            default:
+                return '';
         }
-        return this.minifyHTML(emailHTML);
     }
 
-    minifyHTML(html) {
-        return html.replace(/\s+/g, ' ').replace(/>\s+</g, '><').trim();
-    }
 
     exportNewsletter(newsletterData) {
-        if (!newsletterData.content || newsletterData.content.length === 0) {
+        if (!newsletterData.blocks || newsletterData.blocks.length === 0) {
             alert('Your newsletter is empty. Please add content before exporting.');
             return;
         }
@@ -68,6 +112,3 @@ class NewsletterExporter {
         URL.revokeObjectURL(url);
     }
 }
-
-// Initialize exporter
-const newsletterExporter = new NewsletterExporter();
