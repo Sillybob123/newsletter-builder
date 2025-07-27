@@ -3,10 +3,6 @@ class NewsletterBuilder {
         this.currentNewsletter = {
             title: 'My Newsletter',
             content: [],
-            settings: {
-                brandColor: '#007bff',
-                fontSize: '16px'
-            }
         };
         this.selectedElement = null;
         this.history = [];
@@ -15,20 +11,30 @@ class NewsletterBuilder {
     }
 
     init() {
-        this.bindEvents();
+        this.bindGlobalEvents();
         this.updatePreview();
         this.saveToHistory();
     }
 
-    bindEvents() {
+    // --- EVENT BINDING ---
+    bindGlobalEvents() {
+        // Template Selection
         document.querySelectorAll('.template-card').forEach(card => {
             card.addEventListener('click', (e) => this.selectTemplate(e.currentTarget.dataset.template));
         });
 
+        // Sidebar Dragging
         document.querySelectorAll('.block-btn').forEach(btn => {
-            btn.addEventListener('click', (e) => this.addContentBlock(e.currentTarget.dataset.block));
+            btn.addEventListener('dragstart', this.handleSidebarDragStart.bind(this));
         });
 
+        // Canvas Drop Zone
+        const canvas = document.getElementById('newsletter-canvas');
+        canvas.addEventListener('dragover', this.handleCanvasDragOver.bind(this));
+        canvas.addEventListener('dragleave', this.handleCanvasDragLeave.bind(this));
+        canvas.addEventListener('drop', this.handleCanvasDrop.bind(this));
+
+        // Top Toolbar
         document.getElementById('preview-btn').addEventListener('click', () => this.showPreview());
         document.getElementById('export-btn').addEventListener('click', () => newsletterExporter.exportNewsletter(this.currentNewsletter));
         document.getElementById('undo-btn').addEventListener('click', () => this.undo());
@@ -36,15 +42,125 @@ class NewsletterBuilder {
         document.getElementById('clear-btn').addEventListener('click', () => this.clearNewsletter());
         document.getElementById('spam-check-btn').addEventListener('click', () => this.runSpamCheck());
 
+        // Modals
         document.querySelectorAll('.modal .close-btn').forEach(btn => btn.addEventListener('click', (e) => this.closeModal(e.currentTarget.closest('.modal'))));
         document.getElementById('preview-modal').addEventListener('click', (e) => e.target.id === 'preview-modal' && this.closeModal(e.target));
         document.getElementById('spam-report-modal').addEventListener('click', (e) => e.target.id === 'spam-report-modal' && this.closeModal(e.target));
-
         document.querySelectorAll('.preview-tabs .tab-btn').forEach(btn => {
             btn.addEventListener('click', (e) => this.switchPreviewTab(e.currentTarget));
         });
+
+        // Deselect listener
+         document.addEventListener('click', (e) => {
+            if (!e.target.closest('.content-block') && !e.target.closest('.properties-panel')) {
+                this.deselectBlock();
+            }
+        });
+    }
+    
+    bindBlockEvents() {
+        document.querySelectorAll('.content-block').forEach(blockEl => {
+            blockEl.setAttribute('draggable', 'true');
+            blockEl.addEventListener('click', (e) => {
+                e.stopPropagation();
+                this.selectBlock(parseInt(e.currentTarget.dataset.blockIndex));
+            });
+            blockEl.addEventListener('dragstart', this.handleBlockDragStart.bind(this));
+            blockEl.querySelector('.delete').addEventListener('click', (e) => {
+                e.stopPropagation();
+                this.deleteBlock(parseInt(blockEl.dataset.blockIndex));
+            });
+        });
     }
 
+    // --- DRAG & DROP LOGIC ---
+    handleSidebarDragStart(e) {
+        e.dataTransfer.effectAllowed = 'copy';
+        e.dataTransfer.setData('text/plain', e.currentTarget.dataset.block);
+    }
+    
+    handleBlockDragStart(e) {
+        e.dataTransfer.effectAllowed = 'move';
+        e.dataTransfer.setData('text/plain', `move:${e.currentTarget.dataset.blockIndex}`);
+        // Add a slight delay to allow the browser to render the drag image
+        setTimeout(() => {
+            e.target.style.opacity = '0.5';
+        }, 0);
+    }
+
+    handleCanvasDragOver(e) {
+        e.preventDefault();
+        const canvas = e.currentTarget;
+        canvas.classList.add('drag-over');
+
+        // Remove existing indicators
+        this.removeDropIndicator();
+
+        // Find the element we are hovering over
+        const afterElement = this.getDragAfterElement(canvas, e.clientY);
+        const indicator = document.createElement('div');
+        indicator.className = 'drop-indicator';
+
+        if (afterElement == null) {
+            canvas.appendChild(indicator);
+        } else {
+            canvas.insertBefore(indicator, afterElement);
+        }
+    }
+    
+    getDragAfterElement(container, y) {
+        const draggableElements = [...container.querySelectorAll('.content-block:not(.dragging)')];
+        return draggableElements.reduce((closest, child) => {
+            const box = child.getBoundingClientRect();
+            const offset = y - box.top - box.height / 2;
+            if (offset < 0 && offset > closest.offset) {
+                return { offset: offset, element: child };
+            } else {
+                return closest;
+            }
+        }, { offset: Number.NEGATIVE_INFINITY }).element;
+    }
+
+    handleCanvasDragLeave(e) {
+        e.currentTarget.classList.remove('drag-over');
+        this.removeDropIndicator();
+    }
+
+    handleCanvasDrop(e) {
+        e.preventDefault();
+        e.currentTarget.classList.remove('drag-over');
+        this.removeDropIndicator();
+        
+        document.querySelectorAll('.content-block').forEach(el => el.style.opacity = '1');
+
+        const data = e.dataTransfer.getData('text/plain');
+        const afterElement = this.getDragAfterElement(e.currentTarget, e.clientY);
+        const dropIndex = afterElement ? parseInt(afterElement.dataset.blockIndex) : this.currentNewsletter.content.length;
+
+        if (data.startsWith('move:')) {
+            // Re-ordering existing block
+            const originalIndex = parseInt(data.split(':')[1]);
+            const movedBlock = this.currentNewsletter.content.splice(originalIndex, 1)[0];
+            const finalIndex = originalIndex < dropIndex ? dropIndex - 1 : dropIndex;
+            this.currentNewsletter.content.splice(finalIndex, 0, movedBlock);
+            this.deselectBlock();
+        } else {
+            // Adding new block from sidebar
+            this.addContentBlockAtIndex(data, dropIndex);
+        }
+        
+        this.updatePreview();
+        this.saveToHistory();
+    }
+    
+    removeDropIndicator() {
+        const indicator = document.querySelector('.drop-indicator');
+        if (indicator) {
+            indicator.remove();
+        }
+    }
+
+    // --- CORE BUILDER FUNCTIONS ---
     selectTemplate(templateName) {
         if (!EmailTemplates[templateName]) return;
         document.querySelectorAll('.template-card').forEach(c => c.classList.remove('active'));
@@ -53,12 +169,10 @@ class NewsletterBuilder {
         this.updatePreview();
         this.saveToHistory();
     }
-
-    addContentBlock(blockType) {
+    
+    addContentBlockAtIndex(blockType, index) {
         const newBlock = this.createContentBlock(blockType);
-        this.currentNewsletter.content.push(newBlock);
-        this.updatePreview();
-        this.saveToHistory();
+        this.currentNewsletter.content.splice(index, 0, newBlock);
     }
 
     createContentBlock(type) {
@@ -84,7 +198,11 @@ class NewsletterBuilder {
         const canvas = document.getElementById('newsletter-canvas');
         canvas.innerHTML = '';
         if (this.currentNewsletter.content.length === 0) {
-            canvas.innerHTML = `<div class="empty-state">...</div>`; // Keep your empty state
+            canvas.innerHTML = `<div class="empty-state">
+                <i class="fas fa-mouse-pointer"></i>
+                <h3>Start Building Your Newsletter</h3>
+                <p>Drag content blocks from the left sidebar and drop them here.</p>
+            </div>`;
             return;
         }
         this.currentNewsletter.content.forEach((block, index) => {
@@ -92,45 +210,13 @@ class NewsletterBuilder {
             const wrapper = document.createElement('div');
             wrapper.className = 'content-block';
             wrapper.dataset.blockIndex = index;
-            wrapper.innerHTML = `
-                <div class="block-controls">
-                    <button class="control-btn move-up" title="Move Up"><i class="fas fa-arrow-up"></i></button>
-                    <button class="control-btn move-down" title="Move Down"><i class="fas fa-arrow-down"></i></button>
-                    <button class="control-btn delete" title="Delete"><i class="fas fa-trash"></i></button>
-                </div>
-                ${blockHtml}
-            `;
+            wrapper.innerHTML = `<div class="block-controls"><button class="control-btn delete" title="Delete"><i class="fas fa-trash"></i></button></div>${blockHtml}`;
             canvas.appendChild(wrapper);
         });
         this.bindBlockEvents();
     }
-
-    bindBlockEvents() {
-        document.querySelectorAll('.content-block').forEach(blockEl => {
-            blockEl.addEventListener('click', (e) => {
-                e.stopPropagation();
-                this.selectBlock(parseInt(e.currentTarget.dataset.blockIndex));
-            });
-            blockEl.querySelector('.delete').addEventListener('click', (e) => {
-                e.stopPropagation();
-                this.deleteBlock(parseInt(blockEl.dataset.blockIndex));
-            });
-             blockEl.querySelector('.move-up').addEventListener('click', (e) => {
-                e.stopPropagation();
-                this.moveBlock(parseInt(blockEl.dataset.blockIndex), 'up');
-            });
-            blockEl.querySelector('.move-down').addEventListener('click', (e) => {
-                e.stopPropagation();
-                this.moveBlock(parseInt(blockEl.dataset.blockIndex), 'down');
-            });
-        });
-        document.addEventListener('click', (e) => {
-            if (!e.target.closest('.content-block') && !e.target.closest('.properties-panel')) {
-                this.deselectBlock();
-            }
-        });
-    }
-
+    
+    // --- UI & STATE MANAGEMENT ---
     selectBlock(index) {
         this.selectedElement = index;
         document.querySelectorAll('.content-block').forEach((el, i) => {
@@ -147,17 +233,18 @@ class NewsletterBuilder {
 
     showBlockProperties(index) {
         const block = this.currentNewsletter.content[index];
+        if (!block) return;
         const panel = document.getElementById('properties-content');
         let formHtml = `<div class="property-group"><h4>${this.capitalizeFirst(block.type)} Properties</h4></div>`;
 
         Object.keys(block.content).forEach(key => {
             const value = block.content[key];
-            if (key === 'images' || key === 'links') return; // Handled separately
+            if (typeof value === 'object' && value !== null) return;
             formHtml += `<div class="property-group">
                 <label for="prop-${key}">${this.capitalizeFirst(key)}</label>`;
             if (key.includes('Color')) {
                 formHtml += `<input type="color" id="prop-${key}" value="${value}">`;
-            } else if (typeof value === 'string' && value.length > 50) {
+            } else if (key === 'text' && value.length > 50) {
                  formHtml += `<textarea id="prop-${key}" rows="4">${value}</textarea>`;
             } else {
                  formHtml += `<input type="text" id="prop-${key}" value="${value}">`;
@@ -181,17 +268,6 @@ class NewsletterBuilder {
         }
     }
     
-    moveBlock(index, direction) {
-        const content = this.currentNewsletter.content;
-        const newIndex = direction === 'up' ? index - 1 : index + 1;
-        if (newIndex >= 0 && newIndex < content.length) {
-            [content[index], content[newIndex]] = [content[newIndex], content[index]];
-            this.updatePreview();
-            this.saveToHistory();
-            this.selectBlock(newIndex);
-        }
-    }
-
     deleteBlock(index) {
         this.currentNewsletter.content.splice(index, 1);
         this.deselectBlock();
@@ -240,25 +316,19 @@ class NewsletterBuilder {
         }
     }
     
+    // --- FEATURES ---
     runSpamCheck() {
         const reportModal = document.getElementById('spam-report-modal');
         const reportContent = document.getElementById('spam-report-content');
         let issues = [];
-        
-        // 1. Check for missing alt text
         this.currentNewsletter.content.forEach(block => {
             if (block.type.includes('image') && !block.content.alt) {
                 issues.push('<li>An image is missing alt text. This hurts accessibility and can increase spam scores.</li>');
             }
         });
-
-        // 2. Check for an unsubscribe link
-        const hasUnsubscribe = JSON.stringify(this.currentNewsletter.content).includes('unsubscribe');
-        if (!hasUnsubscribe) {
+        if (!JSON.stringify(this.currentNewsletter.content).includes('unsubscribe')) {
             issues.push('<li>Your newsletter is missing an unsubscribe link. This is required by CAN-SPAM law.</li>');
         }
-
-        // 3. Simple check for spammy words
         const spamWords = ['free', 'viagra', 'win', '$$$', 'act now'];
         const textContent = this.currentNewsletter.content.map(b => b.content.text || b.content.title || '').join(' ').toLowerCase();
         spamWords.forEach(word => {
@@ -266,7 +336,6 @@ class NewsletterBuilder {
                 issues.push(`<li>The word "<strong>${word}</strong>" can sometimes trigger spam filters.</li>`);
             }
         });
-
         if (issues.length === 0) {
             reportContent.innerHTML = '<h4><i class="fas fa-check-circle" style="color: green;"></i> Looks good!</h4><p>No major issues found.</p>';
         } else {
@@ -283,29 +352,16 @@ class NewsletterBuilder {
     switchPreviewTab(activeBtn) {
         document.querySelectorAll('.preview-tabs .tab-btn').forEach(btn => btn.classList.remove('active'));
         activeBtn.classList.add('active');
-        
         const mode = activeBtn.dataset.tab;
         const previewContent = document.getElementById('preview-content');
         const { html } = newsletterExporter.generateEmailHTML(this.currentNewsletter, { raw: true });
-        
         const iframe = document.createElement('iframe');
-        iframe.style.width = '100%';
-        iframe.style.height = '100%';
-        iframe.style.border = 'none';
-        
+        iframe.style.cssText = 'width: 100%; height: 100%; border: none;';
         previewContent.innerHTML = '';
         previewContent.appendChild(iframe);
-        
-        let iframeContent = html;
-        if (mode === 'dark') {
-            iframeContent = `<style>body { background-color: #121212; color: #ffffff; }</style>${html}`;
-        }
-        
-        iframe.srcdoc = iframeContent;
-        previewContent.className = 'preview-content'; // reset class
-        if (mode === 'mobile') {
-            previewContent.classList.add('mobile-preview');
-        }
+        iframe.srcdoc = mode === 'dark' ? `<style>body { background-color: #121212; color: #ffffff; }</style>${html}` : html;
+        previewContent.className = 'preview-content';
+        if (mode === 'mobile') previewContent.classList.add('mobile-preview');
     }
 
     closeModal(modal) {
