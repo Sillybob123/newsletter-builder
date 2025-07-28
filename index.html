@@ -246,7 +246,7 @@
                         <button class="btn btn-icon btn-primary" id="desktop-preview" title="Desktop Preview">
                             <i class="fas fa-desktop"></i>
                         </button>
-                        <button class="btn" id="clear-canvas" title="Clear all content">
+                        <button class="btn" id="clear-canvas-btn" title="Clear all content">
                             <i class="fas fa-trash"></i>
                             Clear
                         </button>
@@ -271,109 +271,41 @@
                 </div>
                 
                 <div class="properties-content" id="properties-content">
-                    <div style="text-align: center; color: var(--secondary); margin-top: 2rem;">
-                        <i class="fas fa-hand-pointer" style="font-size: 2rem; opacity: 0.5; margin-bottom: 1rem;"></i>
+                    <div class="properties-placeholder">
+                        <i class="fas fa-hand-pointer"></i>
                         <p>Select a block to edit its properties</p>
-                        <div style="margin-top: 2rem; padding: 1rem; background: #f8f9fa; border-radius: 8px; border-left: 4px solid var(--primary);">
-                            <h4 style="margin: 0 0 0.5rem 0; color: var(--primary);">Pro Tips</h4>
-                            <ul style="text-align: left; font-size: 0.875rem; color: var(--secondary); margin: 0; padding-left: 1rem;">
-                                <li>Drag blocks from the sidebar to add content</li>
-                                <li>Click any block to customize its properties</li>
-                                <li>Use Ctrl+Z/Y for undo/redo</li>
-                                <li>Press Delete to remove selected blocks</li>
-                            </ul>
-                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    
-    <!-- Templates Modal -->
+
     <div class="modal" id="templates-modal">
-        <div class="modal-content" style="width: 600px; height: auto; max-height: 80vh;">
+        <div class="modal-content" style="width: 600px; max-height: 80vh;">
             <div class="modal-header">
                 <h2><i class="fas fa-folder"></i> Newsletter Templates</h2>
-                <button class="modal-close" onclick="closeModal('templates-modal')" aria-label="Close modal">
-                    <i class="fas fa-times"></i>
-                </button>
+                <button class="modal-close"><i class="fas fa-times"></i></button>
             </div>
             <div class="modal-body">
                 <ul id="template-list"></ul>
-                <div class="toolbar" style="margin-top: 1rem; justify-content: flex-end; gap: 0.5rem;">
-                    <button class="btn" id="new-template-btn" title="Create new template">
-                        <i class="fas fa-plus"></i> New Template
-                    </button>
-                    <button class="btn btn-primary" id="save-template-btn" title="Save current newsletter as template">
-                        <i class="fas fa-save"></i> Save Current
-                    </button>
-                </div>
             </div>
         </div>
     </div>
 
-    <!-- Preview Modal -->
     <div class="modal" id="preview-modal">
         <div class="modal-content" style="width: 95vw; height: 90vh;">
             <div class="modal-header">
                 <h2><i class="fas fa-eye"></i> Newsletter Preview</h2>
-                <button class="modal-close" onclick="closeModal('preview-modal')" aria-label="Close preview">
-                    <i class="fas fa-times"></i>
-                </button>
+                <button class="modal-close"><i class="fas fa-times"></i></button>
             </div>
             <div class="modal-body">
-                <div class="preview-tabs">
-                    <button class="preview-tab active" data-preview="desktop">
-                        <i class="fas fa-desktop"></i> Desktop
-                    </button>
-                    <button class="preview-tab" data-preview="mobile">
-                        <i class="fas fa-mobile-alt"></i> Mobile
-                    </button>
-                    <button class="preview-tab" data-preview="dark">
-                        <i class="fas fa-moon"></i> Dark Mode
-                    </button>
-                </div>
                 <div class="preview-content" id="preview-content"></div>
             </div>
         </div>
     </div>
-
-    <!-- Spam Check Modal -->
-    <div class="modal" id="spam-modal">
-        <div class="modal-content" style="width: 700px; height: auto; max-height: 80vh;">
-            <div class="modal-header">
-                <h2><i class="fas fa-shield-alt"></i> Spam Check Report</h2>
-                <button class="modal-close" onclick="closeModal('spam-modal')" aria-label="Close spam report">
-                    <i class="fas fa-times"></i>
-                </button>
-            </div>
-            <div class="modal-body" id="spam-report"></div>
-        </div>
-    </div>
-
-    <!-- Loading Indicator -->
-    <div id="loading-indicator" style="display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 10000; background: white; padding: 2rem; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.3);">
-        <div style="text-align: center;">
-            <i class="fas fa-spinner fa-spin" style="font-size: 2rem; color: var(--primary); margin-bottom: 1rem;"></i>
-            <p style="margin: 0; color: var(--dark);">Loading...</p>
-        </div>
-    </div>
-
-    <!-- Scripts -->
-<script src="js/templates.js"></script>
+    
+    <script src="js/templates.js"></script>
     <script src="js/export.js"></script>
     <script src="js/builder.js"></script>
-
-    <script>
-        if ('serviceWorker' in navigator) {
-            window.addEventListener('load', function() {
-                navigator.serviceWorker.register('/sw.js').then(function(registration) {
-                    console.log('ServiceWorker registration successful');
-                }, function(err) {
-                    console.log('ServiceWorker registration failed');
-                });
-            });
-        }
-    </script>
 </body>
 </html>

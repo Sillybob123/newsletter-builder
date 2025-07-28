@@ -1,0 +1,182 @@
+            this.save(true);
+        }, 2000);
+    }
+
+    save(silent = false) {
+        if (!this.newsletter) return;
+        
+        const index = this.templates.findIndex(t => t.id === this.newsletter.id);
+        if (index !== -1) {
+            this.templates[index] = { ...this.newsletter };
+        } else {
+            this.templates.push({ ...this.newsletter });
+        }
+        
+        localStorage.setItem('newsletter-templates', JSON.stringify(this.templates));
+
+        if (!silent) {
+            this.showNotification('Template saved!', 'success');
+        }
+        
+        const indicator = document.getElementById('autosave-status');
+        if (indicator) {
+            indicator.innerHTML = '<i class="fas fa-check-circle"></i> Saved';
+            indicator.classList.remove('saving');
+        }
+    }
+
+    load(templateId) {
+        const template = this.templates.find(t => t.id === templateId);
+        if (template) {
+            this.newsletter = JSON.parse(JSON.stringify(template));
+            this.renderCanvas();
+            document.getElementById('newsletter-title').textContent = this.newsletter.title;
+            this.updateGlobalStylesUI();
+            this.saveToHistory();
+            this.showNotification(`Template "${this.newsletter.title}" loaded!`, 'success');
+        }
+        closeModal('templates-modal');
+    }
+    
+    loadTemplates() {
+        try {
+            const saved = localStorage.getItem('newsletter-templates');
+            if (saved) {
+                this.templates = JSON.parse(saved);
+            }
+        } catch (error) {
+            console.error('Error loading templates:', error);
+            this.templates = [];
+        }
+    }
+
+    loadDefaultTemplates() {
+        Object.keys(EmailTemplates).forEach(key => {
+            const tmpl = EmailTemplates[key];
+            const newsletter = {
+                id: 'default_' + key,
+                title: tmpl.name || key,
+                blocks: [],
+                globalStyles: {
+                    fontFamily: 'Inter, sans-serif',
+                    primaryColor: '#007bff',
+                    backgroundColor: '#ffffff'
+                }
+            };
+            
+            tmpl.structure.forEach(item => {
+                const block = this.createBlockData(item.type);
+                block.content = Object.assign({}, block.content, item.content);
+                
+                Object.keys(block.content).forEach(prop => {
+                    if (typeof block.content[prop] === 'boolean' || block.content[prop] === 'true' || block.content[prop] === 'false') {
+                        block.content[prop] = block.content[prop] === true || block.content[prop] === 'true';
+                    }
+                });
+                newsletter.blocks.push(block);
+            });
+            
+            if (!this.templates.some(t => t.id === newsletter.id)) {
+                this.templates.push(newsletter);
+            }
+        });
+    }
+
+    showNotification(message, type = 'info') {
+        const notification = document.createElement('div');
+        notification.style.cssText = `
+            position: fixed;
+            top: 80px;
+            right: 20px;
+            padding: 15px 20px;
+            background: ${type === 'success' ? '#28a745' : type === 'error' ? '#dc3545' : type === 'warning' ? '#ffc107' : '#17a2b8'};
+            color: ${type === 'warning' ? '#333' : 'white'};
+            border-radius: 8px;
+            z-index: 10000;
+            font-weight: 500;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            transform: translateX(400px);
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            max-width: 300px;
+            font-size: 14px;
+        `;
+        
+        const iconMap = {
+            success: 'fas fa-check-circle',
+            error: 'fas fa-times-circle',
+            warning: 'fas fa-exclamation-triangle',
+            info: 'fas fa-info-circle'
+        };
+        
+        notification.innerHTML = `<i class="${iconMap[type]}"></i> ${message}`;
+        document.body.appendChild(notification);
+        
+        setTimeout(() => {
+            notification.style.transform = 'translateX(0)';
+        }, 100);
+        
+        setTimeout(() => {
+            notification.style.transform = 'translateX(400px)';
+            setTimeout(() => {
+                if (document.body.contains(notification)) {
+                    document.body.removeChild(notification);
+                }
+            }, 300);
+        }, 3000);
+    }
+
+    // Utility functions
+    capitalize(str) {
+        return str.charAt(0).toUpperCase() + str.slice(1);
+    }
+
+    formatLabel(key) {
+        return key.replace(/([A-Z])/g, ' $1').replace(/^./, str => str.toUpperCase());
+    }
+}
+
+// Modal functions
+function closeModal(modalId) {
+    const modal = document.getElementById(modalId);
+    if (modal) {
+        modal.classList.remove('active');
+    }
+}
+
+// Initialize the application
+let newsletterForge;
+document.addEventListener('DOMContentLoaded', () => {
+    console.log('DOM loaded, initializing Newsletter Forge...');
+    
+    try {
+        newsletterForge = new NewsletterForge();
+        console.log('Newsletter Forge initialized successfully');
+        
+        // Load dark mode preference
+        const darkMode = localStorage.getItem('newsletter-dark-mode') === 'true';
+        if (darkMode) {
+            newsletterForge.toggleDarkMode();
+        }
+        
+        // Close modals when clicking outside
+        document.querySelectorAll('.modal').forEach(modal => {
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) {
+                    modal.classList.remove('active');
+                }
+            });
+        });
+
+        // Initialize desktop preview by default
+        const desktopBtn = document.getElementById('desktop-preview');
+        if (desktopBtn) {
+            desktopBtn.classList.add('btn-primary');
+        }
+        
+        console.log('Application ready!');
+        
+    } catch (error) {
+        console.error('Error initializing Newsletter Forge:', error);
+        alert('Error initializing the application. Please refresh the page.');
+    }
+});
