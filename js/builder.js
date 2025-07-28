@@ -151,6 +151,15 @@ class NewsletterBuilder {
             case 'header': return { ...base, content: { padding: {}, imageUrl: 'https://via.placeholder.com/600x150/007bff/ffffff?text=Your+Logo', link: '#' } };
             case 'footer': return { ...base, content: { padding: {}, backgroundColor: '#f0f0f0', textColor: '#666666', companyName: 'Your Company Name', address: '123 Main St, Anytown, USA', unsubscribeUrl: '#', socialLinks: [{ platform: 'linkedin', url: '#' }, { platform: 'instagram', url: '#' }] } };
             case 'article': return { ...base, content: { ...base.content, title: 'Article Title', description: 'This is the description for the article. It provides a brief summary of the content.', imageUrl: 'https://via.placeholder.com/250', imageLeft: true, ctaText: 'Read More', ctaUrl: '#', imageWidth: 250 } };
+            case 'boxedText': return { ...base, content: { ...base.content, text: 'This is a boxed text block.', backgroundColor: '#f0f0f0', borderColor: '#dddddd', borderWidth: 1, borderRadius: 5 } };
+            case 'imageText': return { ...base, content: { ...base.content, title: 'Image + Text', text: 'Describe the image or provide additional information here.', imageUrl: 'https://via.placeholder.com/250', imageLeft: true } };
+            case 'imageGroup': return { ...base, content: { ...base.content, images: [{ src: 'https://via.placeholder.com/190x150' }, { src: 'https://via.placeholder.com/190x150' }, { src: 'https://via.placeholder.com/190x150' }] } };
+            case 'video': return { ...base, content: { ...base.content, videoUrl: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ', thumbnailUrl: 'https://img.youtube.com/vi/dQw4w9WgXcQ/0.jpg' } };
+            case 'code': return { ...base, content: { ...base.content, html: '<div>\n  \n</div>' } };
+            case 'social': return { ...base, content: { ...base.content, links: [{ platform: 'linkedin', url: '#' }, { platform: 'instagram', url: '#' }, { platform: 'twitter', url: '#' }] } };
+            case 'columns2': return { ...base, content: { ...base.content, columns: [{ text: 'Column 1' }, { text: 'Column 2' }] } };
+            case 'columns3': return { ...base, content: { ...base.content, columns: [{ text: 'Column 1' }, { text: 'Column 2' }, { text: 'Column 3' }] } };
+            case 'brainTeaser': return { ...base, content: { ...base.content, title: 'Brain Teaser', question: 'I have cities, but no houses. I have mountains, but no trees. I have water, but no fish. What am I?', answer: 'A map' } };
             default: return { ...base, content: { ...base.content } };
         }
     }
@@ -181,6 +190,10 @@ class NewsletterBuilder {
             header: [this.createInput('imageUrl', 'Logo URL'), this.createInput('link', 'Link URL')],
             footer: [this.createInput('companyName', 'Company Name'), this.createInput('address', 'Address'), this.createInput('unsubscribeUrl', 'Unsubscribe URL'), this.createInput('backgroundColor', 'Bg Color', 'color'), this.createInput('textColor', 'Text Color', 'color')],
             article: [this.createInput('title', 'Title'), this.createTextArea('description', 'Description'), this.createInput('imageUrl', 'Image URL'), this.createInput('ctaText', 'Button Text'), this.createInput('ctaUrl', 'Button URL'), this.createToggle('imageLeft', 'Image on Left?')],
+            boxedText: [this.createTextArea('text', 'Text'), this.createInput('backgroundColor', 'Bg Color', 'color'), this.createInput('borderColor', 'Border Color', 'color'), this.createInput('borderWidth', 'Border Width', 'number'), this.createInput('borderRadius', 'Border Radius', 'number')],
+            imageText: [this.createInput('title', 'Title'), this.createTextArea('text', 'Text'), this.createInput('imageUrl', 'Image URL'), this.createToggle('imageLeft', 'Image on Left?')],
+            video: [this.createInput('videoUrl', 'Video URL'), this.createInput('thumbnailUrl', 'Thumbnail URL')],
+            code: [this.createTextArea('html', 'HTML Code')],
         };
         const controls = standardControls[block.type] || [];
         if (block.content.padding) {
