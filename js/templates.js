@@ -171,5 +171,147 @@ const EmailTemplates = {
                 }
             }
         ]
+    },
+
+    // Custom template based off of the provided WorkinOn copy HTML. This
+    // template follows the Catalyst design with an image header, a
+    // highlighted introduction text, a section for the latest posts, a couple of
+    // article cards and a footer with social links. You can load this
+    // template directly from the builder and customise it as needed.
+    custom_copy1: {
+        name: 'Catalyst Newsletter Copy 1',
+        structure: [
+            {
+                type: 'header',
+                content: {
+                    imageUrl: 'https://ci3.googleusercontent.com/meips/ADKq_NbgAwWYM_MMSu5omcK5--beMjfR_An8j288ytZQKGZsUQSJ_rdf97s-i8YNkX-lyRIin0c7rRuKXtNBzqM3lNiv1m1KxbGZKL0SWmmZIsF_lHclQyhr6KWC0mkVDS5stCAmqnhjHJppX3XN1pYmb88UsH8JV7FxEfE=s0-d-e1-ft#https://mcusercontent.com/d76819924b4f0773791d6827b/images/66b9f1d7-4f68-f6ac-a802-885c31858105.jpg',
+                    link: 'https://www.catalyst-magazine.com/'
+                }
+            },
+            {
+                type: 'boxedText',
+                content: {
+                    text: '<em>In this issue, we break down real-world science, from Dr. Song Gao’s take on how atmospheric chemistry meets policy to Tyler Wyka’s work on decarbonizing energy systems. We also uncover the genetics behind insect coloration and explore why you can’t tickle yourself silly.</em><br><br><em>As <strong>Albert Einstein</strong> once said, “I have no special talent. I am only passionately curious.” Let that spark your curiosity, and dive into the articles below!</em>',
+                    backgroundColor: '#2c2c2e',
+                    textColor: '#ffffff',
+                    borderRadius: '30px',
+                    padding: '18px 24px'
+                }
+            },
+            {
+                type: 'heading',
+                content: {
+                    text: 'Latest Posts.',
+                    fontSize: '31px',
+                    fontWeight: 'bold',
+                    color: '#333333',
+                    textAlign: 'left',
+                    padding: { top: '10px', right: '24px', bottom: '10px', left: '24px' },
+                    margin: { top: '0', right: '0', bottom: '0', left: '0' }
+                }
+            },
+            {
+                type: 'article',
+                content: {
+                    title: 'Pollution to Solution: Dr. Song Gao on Environmental Sustainability',
+                    description: 'Dr. Song Gao bridges science and policy to tackle climate change. From aerosols to ozone, his work reveals how atmospheric chemistry and flexible international agreements like the Montreal Protocol can shape real-world sustainability and environmental solutions.',
+                    imageUrl: 'https://ci3.googleusercontent.com/meips/ADKq_NYV1ZpPcHjRVY0d2y1r-hjgIUTXgIbwQcG5_JuNWCrd7Rvl9Aecmi8auARj6K6GHaVmo0IrmJyBf4JmAqqeajVAL4oaFUB-s3yF3z4l05n6U3_0n8QpGtMA334Oixf3G8CimWMoNsR5DEHEzHe6mLawfASCuZWDDKlN=s0-d-e1-ft#https://mcusercontent.com/d76819924b4f0773791d6827b/images/8ee205f5-06ff-99e6-b269-f8e4e0d9d1e8.jpeg',
+                    ctaText: 'See more',
+                    ctaUrl: 'https://www.catalyst-magazine.com/post/pollution-to-solution-dr-song-gao-on-science-policy-and-environmental-sustainability',
+                    imageLeft: true
+                }
+            },
+            {
+                type: 'article',
+                content: {
+                    title: 'How One Engineer is Changing Sustainable Fuels',
+                    description: 'Tyler Wyka blends engineering, policy, and global collaboration to tackle climate change. From turbine fuel research to building solar infrastructure in Sierra Leone, his journey shows how curiosity, innovation, and interdisciplinary action can drive sustainable change.',
+                    imageUrl: 'https://ci3.googleusercontent.com/meips/ADKq_NbUV3iE24tnoSnOchHSVHd3tzMrR8eLrhdF9hskQ-mFfVdthM_jV903wEplWy60RvYaw9y-hcjur_Lrc3jBizdP_hj9Bv6BwticggTfzHf_mSfm7pDbdhh1vAjBVIFCtU_50DmSMKkGl885rDps9-MAJvZMV4wQQHY9=s0-d-e1-ft#https://mcusercontent.com/d76819924b4f0773791d6827b/images/c4e38886-74cc-51f5-1784-01e9ea397787.jpeg',
+                    ctaText: 'See more',
+                    ctaUrl: 'https://www.catalyst-magazine.com/post/how-one-engineer-is-changing-sustainable-fuels',
+                    imageLeft: false
+                }
+            },
+            {
+                type: 'footer',
+                content: {
+                    companyName: 'catalyst-magazine.com',
+                    companyUrl: 'http://catalyst-magazine.com/',
+                    socialLinks: [
+                        { platform: 'linkedin', url: 'https://www.linkedin.com/company/the-catalyst-stem-magazine' },
+                        { platform: 'instagram', url: 'https://www.instagram.com/thecatalyst_dc' }
+                    ],
+                    unsubscribeUrl: 'https://www.catalyst-magazine.com/unsubscribe',
+                    padding: { top: '20px', right: '20px', bottom: '20px', left: '20px' },
+                    backgroundColor: '#f8f9fa',
+                    textColor: '#666666',
+                    fontSize: '12px'
+                }
+            }
+        ]
+    },
+
+    // A second custom template inspired by the second uploaded HTML. This
+    // version offers a simpler layout with an image header, introductory
+    // message, a featured article, a brain teaser and a footer.
+    custom_copy2: {
+        name: 'Catalyst Newsletter Copy 2',
+        structure: [
+            {
+                type: 'header',
+                content: {
+                    imageUrl: 'https://ci3.googleusercontent.com/meips/ADKq_NbgAwWYM_MMSu5omcK5--beMjfR_An8j288ytZQKGZsUQSJ_rdf97s-i8YNkX-lyRIin0c7rRuKXtNBzqM3lNiv1m1KxbGZKL0SWmmZIsF_lHclQyhr6KWC0mkVDS5stCAmqnhjHJppX3XN1pYmb88UsH8JV7FxEfE=s0-d-e1-ft#https://mcusercontent.com/d76819924b4f0773791d6827b/images/66b9f1d7-4f68-f6ac-a802-885c31858105.jpg',
+                    link: 'https://www.catalyst-magazine.com/'
+                }
+            },
+            {
+                type: 'text',
+                content: {
+                    text: 'A scientist\'s path is rarely a straight line; sometimes the most profound work begins with an unexpected crisis.\n\nThis edition of Catalyst shares stories of ingenuity born from necessity. We feature a pioneer whose harrowing illness redefined the field of biosecurity, a researcher uncovering how coastal forests adapt to survive, and an innovator whose work is creating a more sustainable and equitable world.\n\nRead on and rediscover the joy of curiosity.',
+                    fontSize: '16px',
+                    fontWeight: 'normal',
+                    color: '#333333',
+                    textAlign: 'left',
+                    padding: { top: '20px', right: '24px', bottom: '20px', left: '24px' }
+                }
+            },
+            {
+                type: 'article',
+                content: {
+                    title: 'From Battling a Bioweapon Pathogen to Pioneering Global Health Security',
+                    description: 'A battle with a rare, weaponized pathogen led Dr. Rebecca Katz to pioneer the field of global health security. From advising on post-9/11 attacks to COVID-19, Katz remains a critical expert shaping public health and national defense.',
+                    imageUrl: 'https://ci3.googleusercontent.com/meips/ADKq_NbE-6OfNMsUi_pzBjCHJ8Th8gZ2UWUigX_Kktl2CDLdDxhNgEnmq1K_tcigVS3um7DgAOMXflFUV0qLCQPnoiOZRPgaB2IzseKt__Bzeezz-LBXhHmeAOIXQGgn-Y38TZZag41sOws7qhfLjectoJdhsw89Pl4OcNix=s0-d-e1-ft#https://mcusercontent.com/d76819924b4f0773791d6827b/images/75a6eef0-fc3d-d3dd-7816-46ff5270a673.jpeg',
+                    ctaText: 'See more',
+                    ctaUrl: 'https://www.catalyst-magazine.com/post/reframing-health-as-a-national-security-issue',
+                    imageLeft: true
+                }
+            },
+            {
+                type: 'brainTeaser',
+                content: {
+                    title: 'Solve Our Brain Teaser',
+                    question: 'A man is asked about his children. He replies with two curious statements:\n\n"Every son I have has the same number of brothers as he has sisters."\n\n"Every daughter I have has twice as many brothers as she has sisters."\n\nHow many sons and daughters does the man have?',
+                    imageUrl: 'https://ci3.googleusercontent.com/meips/ADKq_NbUnHkUSjlsnm3Jv7NKBhk1byklJyqOK3LSNMbHQrqCpfdmJgfCz1Dw6en83pVY2EzIcwAhVtW8-ARNMtBmehIilYtnIXKSPydnWAVQblCSx-PfD_QkOHtFFHBC0hCx2NicI05bjHWkxx18JOAAa_gFTrM8QQppLG2k=s0-d-e1-ft#https://mcusercontent.com/d76819924b4f0773791d6827b/images/7d3828a4-5525-72a0-6b9c-7426b23c1595.jpeg',
+                    ctaText: 'Submit Your Answer',
+                    ctaUrl: 'https://www.catalyst-magazine.com/#teaser'
+                }
+            },
+            {
+                type: 'footer',
+                content: {
+                    companyName: 'catalyst-magazine.com',
+                    companyUrl: 'http://catalyst-magazine.com/',
+                    socialLinks: [
+                        { platform: 'linkedin', url: 'https://www.linkedin.com/company/the-catalyst-stem-magazine' },
+                        { platform: 'instagram', url: 'https://www.instagram.com/thecatalyst_dc' }
+                    ],
+                    unsubscribeUrl: 'https://www.catalyst-magazine.com/unsubscribe',
+                    padding: { top: '20px', right: '20px', bottom: '20px', left: '20px' },
+                    backgroundColor: '#f8f9fa',
+                    textColor: '#666666',
+                    fontSize: '12px'
+                }
+            }
+        ]
     }
 };
