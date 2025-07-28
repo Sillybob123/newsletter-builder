@@ -1,113 +1,72 @@
 const EmailTemplates = {
-    minimalist: {
-        name: 'Minimalist',
-        structure: [
-            {
-                type: 'heading',
-                content: {
-                    text: 'Weekly Briefing',
-                    padding: { top: '30', right: '30', bottom: '10', left: '30' },
-                    fontSize: '36',
-                    color: '#222222',
-                    textAlign: 'left',
-                    fontWeight: 'bold'
-                }
-            },
-            {
-                type: 'text',
-                content: {
-                    text: 'A curated summary of this week’s most important news and insights. Designed for clarity and focus.',
-                    padding: { top: '10', right: '30', bottom: '30', left: '30' },
-                    fontSize: '18',
-                    color: '#555555',
-                    textAlign: 'left'
-                }
-            },
-            {
-                type: 'divider',
-                content: {
-                    padding: { top: '10', right: '30', bottom: '10', left: '30' },
-                    color: '#eeeeee',
-                    height: '1'
-                }
-            },
-            {
-                type: 'heading',
-                content: {
-                    text: 'Lead Story',
-                    padding: { top: '20', right: '30', bottom: '10', left: '30' },
-                    fontSize: '24',
-                    color: '#333333',
-                    textAlign: 'left',
-                    fontWeight: 'bold'
-                }
-            },
-            {
-                type: 'text',
-                content: {
-                    text: 'This section contains the main article. It is concise and to the point, respecting the reader’s time while delivering maximum value.',
-                    padding: { top: '10', right: '30', bottom: '20', left: '30' },
-                    fontSize: '16',
-                    color: '#333333',
-                    textAlign: 'left'
-                }
-            },
-            {
-                type: 'button',
-                content: {
-                    text: 'Read More',
-                    href: '#',
-                    padding: { top: '12', right: '24', bottom: '12', left: '24' },
-                    backgroundColor: '#000000',
-                    color: '#ffffff',
-                    borderRadius: '5',
-                    textAlign: 'left'
-                }
-            }
-        ]
-    },
-    catalyst_v1: {
-        name: 'Catalyst V1',
+    productLaunch: {
+        name: 'Product Launch',
         structure: [
             {
                 type: 'header',
-                content: {
-                    imageUrl: 'https://ci3.googleusercontent.com/meips/ADKq_NbgAwWYM_MMSu5omcK5--beMjfR_An8j288ytZQKGZsUQSJ_rdf97s-i8YNkX-lyRIin0c7rRuKXtNBzqM3lNiv1m1KxbGZKL0SWmmZIsF_lHclQyhr6KWC0mkVDS5stCAmqnhjHJppX3XN1pYmb88UsH8JV7FxEfE=s0-d-e1-ft#https://mcusercontent.com/d76819924b4f0773791d6827b/images/66b9f1d7-4f68-f6ac-a802-885c31858105.jpg',
-                    link: 'https://www.catalyst-magazine.com/'
-                }
+                content: { imageUrl: 'https://via.placeholder.com/600x200/4a4a4a/ffffff?text=Our+New+Product', link: '#' }
+            },
+            {
+                type: 'heading',
+                content: { padding: { top: 30, right: 30, bottom: 10, left: 30 }, text: 'It’s Here: The Future of Innovation', fontSize: 32, color: '#222222', textAlign: 'center', fontWeight: 'bold' }
             },
             {
                 type: 'text',
-                content: {
-                    text: 'A scientist\'s path is rarely a straight line; sometimes the most profound work begins with an unexpected crisis. <br><br> This edition of Catalyst shares stories of ingenuity born from necessity. We feature a pioneer whose harrowing illness redefined the field of biosecurity, a researcher uncovering how coastal forests adapt to survive, and an innovator whose work is creating a more sustainable and equitable world.<br><br>Read on and rediscover the joy of curiosity.',
-                    backgroundColor: '#2c2c2e',
-                    textColor: '#ffffff',
-                    borderRadius: '30px',
-                    padding: '18px 24px'
-                }
+                content: { padding: { top: 10, right: 40, bottom: 20, left: 40 }, text: 'We are incredibly excited to announce the launch of our revolutionary new product. After months of hard work and dedication, we’ve created something that will change the way you work.', fontSize: 18, lineHeight: 1.6, color: '#555555', textAlign: 'center' }
+            },
+            {
+                type: 'button',
+                content: { padding: { top: 10, right: 30, bottom: 30, left: 30 }, href: '#', text: 'Discover The Product', backgroundColor: '#007bff', color: '#ffffff', borderRadius: 5, align: 'center', fontWeight: 'bold', fontSize: 18 }
             },
             {
                 type: 'article',
-                content: {
-                    title: 'From Battling a Bioweapon Pathogen to Pioneering Global Health Security',
-                    description: 'A battle with a rare, weaponized pathogen led Dr. Rebecca Katz to pioneer the field of global health security. From advising on post-9/11 attacks to COVID-19, Katz remains a critical expert shaping public health and national defense.',
-                    imageUrl: 'https://ci3.googleusercontent.com/meips/ADKq_NbE-6OfNMsUi_pzBjCHJ8Th8gZ2UWUigX_Kktl2CDLdDxhNgEnmq1K_tcigVS3um7DgAOMXflFUV0qLCQPnoiOZRPgaB2IzseKt__Bzeezz-LBXhHmeAOIXQGgn-Y38TZZag41sOws7qhfLjectoJdhsw89Pl4OcNix=s0-d-e1-ft#https://mcusercontent.com/d76819924b4f0773791d6827b/images/75a6eef0-fc3d-d3dd-7816-46ff5270a673.jpeg',
-                    ctaText: 'See more',
-                    ctaUrl: 'https://www.catalyst-magazine.com/post/reframing-health-as-a-national-security-issue',
-                    imageLeft: true
-                }
+                content: { padding: { top: 20, right: 20, bottom: 20, left: 20 }, title: 'Unmatched Performance', description: 'Experience speed and efficiency like never before. Our new product is built on a next-generation platform, delivering unparalleled performance.', imageUrl: 'https://via.placeholder.com/250x200/007bff/ffffff', imageLeft: true, ctaText: 'Learn More', ctaUrl: '#' }
+            },
+            {
+                type: 'divider',
+                content: { padding: { top: 20, right: 20, bottom: 20, left: 20 }, color: '#eeeeee', height: 1, style: 'solid' }
             },
             {
                 type: 'article',
-                content: {
-                    title: 'Designing a Sustainable Future with Sun, Wind, and Water',
-                    description: 'For innovator Scott Sklar, renewable energy is about more than the grid, it\'s about human impact. His vision is for a practical and accessible energy future.',
-                    imageUrl: 'https://ci3.googleusercontent.com/meips/ADKq_NY0mX0MjUrchH53JswSqcxOoqZogPpSxp6lJt9Miw4H9a5lmxl-dIbwiwG0YLviZhfCy7Q1OJlSiCGGCb6vHFCwQfWZUjyrh-Jl555tk3qt5G0yvs-57kvD9MYWXWoIJFBGAyP80mg1tQkotRDQeCXGHhHK7-WlTGOu=s0-d-e1-ft#https://mcusercontent.com/d76819924b4f0773791d6827b/images/2479cf95-1358-74d5-ad9b-fc5767e0b760.jpeg',
-                    ctaText: 'See more',
-                    ctaUrl: 'https://www.catalyst-magazine.com/post/designing-a-sustainable-future-with-sun-wind-and-water',
-                    imageLeft: false
-                }
+                content: { padding: { top: 20, right: 20, bottom: 20, left: 20 }, title: 'Sleek, Intuitive Design', description: 'A beautiful interface that is a joy to use. We designed every pixel to create the most intuitive and user-friendly experience possible.', imageUrl: 'https://via.placeholder.com/250x200/333333/ffffff', imageLeft: false, ctaText: 'See The Gallery', ctaUrl: '#' }
+            },
+            {
+                type: 'footer',
+                content: { backgroundColor: '#f8f9fa', textColor: '#6c757d', companyName: 'Innovate Inc.', address: '123 Innovation Drive, Techville, USA', unsubscribeUrl: '#', socialLinks: [{ platform: 'linkedin', url: '#' }, { platform: 'instagram', url: '#' }] }
             }
         ]
-    }
+    },
+    weeklyDigest: {
+        name: 'Weekly Digest',
+        structure: [
+            {
+                type: 'heading',
+                content: { padding: { top: 30, right: 30, bottom: 0, left: 30 }, text: 'Your Weekly Digest', fontSize: 36, color: '#2c3e50', textAlign: 'left', fontWeight: 'bold' }
+            },
+            {
+                type: 'text',
+                content: { padding: { top: 5, right: 30, bottom: 20, left: 30 }, text: 'The most important updates from the past week.', fontSize: 18, color: '#7f8c8d', textAlign: 'left' }
+            },
+            {
+                type: 'image',
+                content: { padding: { top: 0, right: 0, bottom: 0, left: 0 }, src: 'https://via.placeholder.com/600x250/3498db/ffffff?text=Featured+Story', alt: 'Featured Story', link: '#', borderRadius: 0 }
+            },
+            {
+                type: 'heading',
+                content: { padding: { top: 20, right: 30, bottom: 10, left: 30 }, text: 'The Week\'s Top Story', fontSize: 24, color: '#34495e', textAlign: 'left', fontWeight: 'bold' }
+            },
+            {
+                type: 'text',
+                content: { padding: { top: 0, right: 30, bottom: 20, left: 30 }, text: 'This week, we saw major developments in the industry. Here is a quick breakdown of what you need to know and why it matters for the future.', fontSize: 16, lineHeight: 1.6, color: '#333333', textAlign: 'left' }
+            },
+            {
+                type: 'button',
+                content: { padding: { top: 0, right: 30, bottom: 30, left: 30 }, href: '#', text: 'Read Full Story', backgroundColor: '#3498db', color: '#ffffff', borderRadius: 5, align: 'left', fontWeight: 'bold', fontSize: 16 }
+            },
+            {
+                type: 'footer',
+                content: { backgroundColor: '#ecf0f1', textColor: '#95a5a6', companyName: 'Digestible News', address: '456 Knowledge Ave, Infotown, USA', unsubscribeUrl: '#', socialLinks: [{ platform: 'linkedin', url: '#' }, { platform: 'instagram', url: '#' }] }
+            }
+        ]
+    },
 };
