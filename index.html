@@ -67,76 +67,170 @@
         <div class="main-content">
             <div class="left-sidebar">
                 <div class="sidebar-tabs">
-                    <button class="sidebar-tab active" data-tab="blocks">
-                        <i class="fas fa-cube"></i>
-                        Blocks
+                    <button class="sidebar-tab active" data-tab="content">
+                        <i class="fas fa-plus-circle"></i>
+                        Content
                     </button>
-                    <button class="sidebar-tab" data-tab="styles">
+                    <button class="sidebar-tab" data-tab="design">
                         <i class="fas fa-palette"></i>
-                        Styles
+                        Design
                     </button>
                 </div>
                 
-                <div class="tab-content active" id="blocks-tab">
-                    <div class="content-blocks">
-                        <div class="content-block-btn" draggable="true" data-block="text">
-                            <i class="fas fa-font"></i>
-                            <span>Text Block</span>
+                <div class="sidebar-content">
+                    <div id="content-tab" class="tab-content active">
+                        <div class="block-category">
+                            <h3><i class="fas fa-cube"></i> Basic Blocks</h3>
+                            <div class="block-grid">
+                                <div class="content-block-btn" draggable="true" data-block="text" title="Add text content">
+                                    <i class="fas fa-paragraph"></i>
+                                    <span>Text</span>
+                                </div>
+                                <div class="content-block-btn" draggable="true" data-block="heading" title="Add heading">
+                                    <i class="fas fa-heading"></i>
+                                    <span>Heading</span>
+                                </div>
+                                <div class="content-block-btn" draggable="true" data-block="image" title="Add image">
+                                    <i class="fas fa-image"></i>
+                                    <span>Image</span>
+                                </div>
+                                <div class="content-block-btn" draggable="true" data-block="button" title="Add call-to-action button">
+                                    <i class="fas fa-mouse-pointer"></i>
+                                    <span>Button</span>
+                                </div>
+                                <div class="content-block-btn" draggable="true" data-block="divider" title="Add divider line">
+                                    <i class="fas fa-grip-lines"></i>
+                                    <span>Divider</span>
+                                </div>
+                                <div class="content-block-btn" draggable="true" data-block="spacer" title="Add spacing">
+                                    <i class="fas fa-arrows-alt-v"></i>
+                                    <span>Spacer</span>
+                                </div>
+                            </div>
                         </div>
-                        <div class="content-block-btn" draggable="true" data-block="heading">
-                            <i class="fas fa-heading"></i>
-                            <span>Heading</span>
+
+                        <div class="block-category">
+                            <h3><i class="fas fa-star"></i> Advanced Blocks</h3>
+                            <div class="block-grid">
+                                <div class="content-block-btn" draggable="true" data-block="boxedText" title="Add styled text box">
+                                    <i class="fas fa-square"></i>
+                                    <span>Boxed Text</span>
+                                </div>
+                                <div class="content-block-btn" draggable="true" data-block="imageText" title="Add image with text">
+                                    <i class="fas fa-id-card"></i>
+                                    <span>Image + Text</span>
+                                </div>
+                                <div class="content-block-btn" draggable="true" data-block="imageGroup" title="Add image gallery">
+                                    <i class="fas fa-images"></i>
+                                    <span>Image Group</span>
+                                </div>
+                                <div class="content-block-btn" draggable="true" data-block="video" title="Add video">
+                                    <i class="fas fa-play"></i>
+                                    <span>Video</span>
+                                </div>
+                                <div class="content-block-btn" draggable="true" data-block="code" title="Add custom HTML">
+                                    <i class="fas fa-code"></i>
+                                    <span>HTML Code</span>
+                                </div>
+                                <div class="content-block-btn" draggable="true" data-block="social" title="Add social media links">
+                                    <i class="fas fa-share-alt"></i>
+                                    <span>Social Follow</span>
+                                </div>
+                            </div>
                         </div>
-                        <div class="content-block-btn" draggable="true" data-block="image">
-                            <i class="fas fa-image"></i>
-                            <span>Image</span>
+
+                        <div class="block-category">
+                            <h3><i class="fas fa-th-large"></i> Layout Blocks</h3>
+                            <div class="block-grid">
+                                <div class="content-block-btn" draggable="true" data-block="columns2" title="Add two-column layout">
+                                    <i class="fas fa-columns"></i>
+                                    <span>2 Columns</span>
+                                </div>
+                                <div class="content-block-btn" draggable="true" data-block="columns3" title="Add three-column layout">
+                                    <i class="fas fa-th-large"></i>
+                                    <span>3 Columns</span>
+                                </div>
+                                <div class="content-block-btn" draggable="true" data-block="header" title="Add newsletter header">
+                                    <i class="fas fa-window-maximize"></i>
+                                    <span>Header</span>
+                                </div>
+                                <div class="content-block-btn" draggable="true" data-block="footer" title="Add newsletter footer">
+                                    <i class="fas fa-copyright"></i>
+                                    <span>Footer</span>
+                                </div>
+                            </div>
                         </div>
-                        <div class="content-block-btn" draggable="true" data-block="button">
-                            <i class="fas fa-mouse-pointer"></i>
-                            <span>Button</span>
-                        </div>
-                        <div class="content-block-btn" draggable="true" data-block="divider">
-                            <i class="fas fa-minus"></i>
-                            <span>Divider</span>
-                        </div>
-                        <div class="content-block-btn" draggable="true" data-block="spacer">
-                            <i class="fas fa-arrows-alt-v"></i>
-                            <span>Spacer</span>
-                        </div>
-                        <div class="content-block-btn" draggable="true" data-block="social">
-                            <i class="fas fa-share-alt"></i>
-                            <span>Social Links</span>
-                        </div>
-                        <div class="content-block-btn" draggable="true" data-block="footer">
-                            <i class="fas fa-align-center"></i>
-                            <span>Footer</span>
+
+                        <div class="block-category">
+                            <h3><i class="fas fa-puzzle-piece"></i> Special Blocks</h3>
+                            <div class="block-grid">
+                                <div class="content-block-btn" draggable="true" data-block="article" title="Add article layout">
+                                    <i class="fas fa-newspaper"></i>
+                                    <span>Article</span>
+                                </div>
+                                <div class="content-block-btn" draggable="true" data-block="brainTeaser" title="Add brain teaser">
+                                    <i class="fas fa-brain"></i>
+                                    <span>Brain Teaser</span>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </div>
-                
-                <div class="tab-content" id="styles-tab">
-                    <div class="global-styles">
-                        <div class="property-group">
-                            <label>Font Family</label>
-                            <select id="global-font">
-                                <option value="Arial, sans-serif">Arial</option>
-                                <option value="Georgia, serif">Georgia</option>
-                                <option value="'Times New Roman', serif">Times New Roman</option>
-                                <option value="'Helvetica Neue', Helvetica, Arial, sans-serif">Helvetica</option>
-                                <option value="Inter, sans-serif" selected>Inter</option>
-                            </select>
+
+                    <div id="design-tab" class="tab-content" style="display: none;">
+                        <div class="block-category">
+                            <h3><i class="fas fa-globe"></i> Global Styles</h3>
+                            <div class="property-group">
+                                <label for="global-font">
+                                    <i class="fas fa-font"></i>
+                                    Font Family
+                                </label>
+                                <select id="global-font">
+                                    <option value="Inter, sans-serif">Inter (Modern)</option>
+                                    <option value="Georgia, serif">Georgia (Classic)</option>
+                                    <option value="Arial, sans-serif">Arial (Universal)</option>
+                                    <option value="Helvetica, sans-serif">Helvetica (Clean)</option>
+                                    <option value="Times New Roman, serif">Times New Roman</option>
+                                    <option value="Verdana, sans-serif">Verdana</option>
+                                </select>
+                            </div>
+                            <div class="property-group">
+                                <label>
+                                    <i class="fas fa-palette"></i>
+                                    Primary Color
+                                </label>
+                                <div class="color-input-group">
+                                    <input type="color" id="primary-color" value="#007bff" title="Choose primary color">
+                                    <input type="text" id="primary-color-text" value="#007bff" placeholder="#007bff">
+                                </div>
+                            </div>
+                            <div class="property-group">
+                                <label>
+                                    <i class="fas fa-fill-drip"></i>
+                                    Background Color
+                                </label>
+                                <div class="color-input-group">
+                                    <input type="color" id="bg-color" value="#ffffff" title="Choose background color">
+                                    <input type="text" id="bg-color-text" value="#ffffff" placeholder="#ffffff">
+                                </div>
+                            </div>
                         </div>
-                        <div class="property-group">
-                            <label>Background Color</label>
-                            <input type="color" id="global-bg-color" value="#ffffff">
-                        </div>
-                        <div class="property-group">
-                            <label>Text Color</label>
-                            <input type="color" id="global-text-color" value="#333333">
-                        </div>
-                        <div class="property-group">
-                            <label>Primary Color</label>
-                            <input type="color" id="global-primary-color" value="#007bff">
+
+                        <div class="block-category">
+                            <h3><i class="fas fa-magic"></i> Quick Actions</h3>
+                            <div style="display: flex; flex-direction: column; gap: 0.5rem;">
+                                <button class="btn" onclick="newsletterForge.clearCanvas()" style="width: 100%;">
+                                    <i class="fas fa-trash"></i>
+                                    Clear All
+                                </button>
+                                <button class="btn" onclick="newsletterForge.save()" style="width: 100%;">
+                                    <i class="fas fa-save"></i>
+                                    Save Template
+                                </button>
+                                <button class="btn" onclick="newsletterForge.showTemplates()" style="width: 100%;">
+                                    <i class="fas fa-folder-open"></i>
+                                    Load Template
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -171,41 +265,75 @@
             </div>
 
             <div class="right-sidebar">
-                <div class="properties-panel">
-                    <h3>Properties</h3>
-                    <div id="properties-content">
-                        <div class="no-selection">
-                            <i class="fas fa-mouse-pointer"></i>
-                            <p>Select a block to edit its properties</p>
+                <div class="properties-header">
+                    <i class="fas fa-cog"></i>
+                    Block Properties
+                </div>
+                
+                <div class="properties-content" id="properties-content">
+                    <div style="text-align: center; color: var(--secondary); margin-top: 2rem;">
+                        <i class="fas fa-hand-pointer" style="font-size: 2rem; opacity: 0.5; margin-bottom: 1rem;"></i>
+                        <p>Select a block to edit its properties</p>
+                        <div style="margin-top: 2rem; padding: 1rem; background: #f8f9fa; border-radius: 8px; border-left: 4px solid var(--primary);">
+                            <h4 style="margin: 0 0 0.5rem 0; color: var(--primary);">Pro Tips</h4>
+                            <ul style="text-align: left; font-size: 0.875rem; color: var(--secondary); margin: 0; padding-left: 1rem;">
+                                <li>Drag blocks from the sidebar to add content</li>
+                                <li>Click any block to customize its properties</li>
+                                <li>Use Ctrl+Z/Y for undo/redo</li>
+                                <li>Press Delete to remove selected blocks</li>
+                            </ul>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-
-    <!-- Preview Modal -->
-    <div id="preview-modal" class="modal">
-        <div class="modal-content" style="width: 90vw; height: 90vh;">
+    
+    <!-- Templates Modal -->
+    <div class="modal" id="templates-modal">
+        <div class="modal-content" style="width: 600px; height: auto; max-height: 80vh;">
             <div class="modal-header">
-                <h2><i class="fas fa-eye"></i> Newsletter Preview</h2>
-                <button class="modal-close" onclick="closeModal('preview-modal')">&times;</button>
+                <h2><i class="fas fa-folder"></i> Newsletter Templates</h2>
+                <button class="modal-close" onclick="closeModal('templates-modal')" aria-label="Close modal">
+                    <i class="fas fa-times"></i>
+                </button>
             </div>
-            <div class="modal-body" style="flex: 1; overflow: auto;">
-                <div id="preview-content"></div>
+            <div class="modal-body">
+                <ul id="template-list"></ul>
+                <div class="toolbar" style="margin-top: 1rem; justify-content: flex-end; gap: 0.5rem;">
+                    <button class="btn" id="new-template-btn" title="Create new template">
+                        <i class="fas fa-plus"></i> New Template
+                    </button>
+                    <button class="btn btn-primary" id="save-template-btn" title="Save current newsletter as template">
+                        <i class="fas fa-save"></i> Save Current
+                    </button>
+                </div>
             </div>
         </div>
     </div>
 
-    <!-- Templates Modal -->
-    <div id="templates-modal" class="modal">
-        <div class="modal-content" style="width: 600px;">
+    <!-- Preview Modal -->
+    <div class="modal" id="preview-modal">
+        <div class="modal-content" style="width: 95vw; height: 90vh;">
             <div class="modal-header">
-                <h2><i class="fas fa-folder"></i> Templates</h2>
-                <button class="modal-close" onclick="closeModal('templates-modal')">&times;</button>
+                <h2><i class="fas fa-eye"></i> Newsletter Preview</h2>
+                <button class="modal-close" onclick="closeModal('preview-modal')" aria-label="Close preview">
+                    <i class="fas fa-times"></i>
+                </button>
             </div>
-            <div class="modal-body" style="padding: 1.5rem;">
-                <ul id="template-list"></ul>
+            <div class="modal-body">
+                <div class="preview-tabs">
+                    <button class="preview-tab active" data-preview="desktop">
+                        <i class="fas fa-desktop"></i> Desktop
+                    </button>
+                    <button class="preview-tab" data-preview="mobile">
+                        <i class="fas fa-mobile-alt"></i> Mobile
+                    </button>
+                    <button class="preview-tab" data-preview="dark">
+                        <i class="fas fa-moon"></i> Dark Mode
+                    </button>
+                </div>
+                <div class="preview-content" id="preview-content"></div>
             </div>
         </div>
     </div>
@@ -232,8 +360,20 @@
     </div>
 
     <!-- Scripts -->
-    <script src="js/templates.js"></script>
+<script src="js/templates.js"></script>
     <script src="js/export.js"></script>
     <script src="js/builder.js"></script>
+
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', function() {
+                navigator.serviceWorker.register('/sw.js').then(function(registration) {
+                    console.log('ServiceWorker registration successful');
+                }, function(err) {
+                    console.log('ServiceWorker registration failed');
+                });
+            });
+        }
+    </script>
 </body>
 </html>
